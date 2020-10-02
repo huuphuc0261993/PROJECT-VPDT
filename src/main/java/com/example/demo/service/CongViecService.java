@@ -13,4 +13,5 @@ public interface CongViecService {
     Iterable<CongViec> findByIsDeletedEquals(int id);
     void save(CongViec congViec);
     CongViec idCongViec();
+    List<CongViec> tinhTrangCongViec();
 }

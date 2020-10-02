@@ -21,4 +21,6 @@ public interface CongViecRepository extends PagingAndSortingRepository<CongViec,
 
     @Query(value = "SELECT * FROM cong_viecs order by id desc limit 1; ", nativeQuery = true)
     CongViec idCongViec();
+    @Query(value = "SELECT * FROM vpdt.cong_viecs where ngay_ket_thuc<= now() and tinh_trang_id=1; ", nativeQuery = true)
+    List<CongViec> tinhTrangCongViec();
 }

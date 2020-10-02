@@ -30,5 +30,10 @@ public class CongViecServiceImpl implements CongViecService {
         return congViecRepository.idCongViec();
     }
 
+    @Override
+    public List<CongViec> tinhTrangCongViec() {
+        return congViecRepository.tinhTrangCongViec();
+    }
+
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface DuocGiaoRepository extends PagingAndSortingRepository<CongViec,Long> {
     @Query(value = "select chi_tiet.id from chi_tiet inner join " +
             "cong_viecs on chi_tiet.cong_viec_id = cong_viecs.id where " +
-            "nhan_vien_id = :idNhanVien and cong_viecs.tinh_trang_id = 1;", nativeQuery = true)
+            "nhan_vien_id = :idNhanVien", nativeQuery = true)
     List<Long> congViecCanLam(@Param("idNhanVien")Long idNhanVien);
 
 

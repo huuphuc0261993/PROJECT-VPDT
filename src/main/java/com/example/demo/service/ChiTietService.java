@@ -8,5 +8,6 @@ import org.springframework.stereotype.Service;
 public interface ChiTietService {
     Iterable<ChiTiet> findByIsDeletedEquals(int id);
     void save(ChiTiet chiTiet);
+    ChiTiet findById(Long id);
 //    void create(@Param("nv_chinh")int nv_chinh, @Param("cong_viec_id")int cong_viec_id, @Param("nhan_vien_id")int nhan_vien_id);
 }

@@ -20,6 +20,11 @@ public class ChiTietServiceImpl implements ChiTietService {
         chiTietRepository.save(chiTiet);
     }
 
+    @Override
+    public ChiTiet findById(Long id) {
+        return chiTietRepository.findById(id).orElse(null);
+    }
+
 //    @Override
 //    public void create(int nv_chinh, int cong_viec_id, int nhan_vien_id) {
 //        chiTietRepository.create(nv_chinh,cong_viec_id,nhan_vien_id);

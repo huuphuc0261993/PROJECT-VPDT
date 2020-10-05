@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,9 +31,6 @@ public class ThongBaoController {
     private ThongBaoService thongBaoService;
     @Autowired
     private CongViecService congViecService;
-
-    @Autowired
-    private TinhTrangService tinhTrangService;
 
     @Autowired
     private TinhTrangRepository tinhTrangRepository;
@@ -54,9 +57,8 @@ public class ThongBaoController {
     }
 
     @RequestMapping("/default")
-    public String defaultAfterLogin(HttpServletRequest request) {
+    public String defaultAfterLogin(HttpServletRequest request) throws ParseException {
         List<CongViec> congViecs = congViecService.tinhTrangCongViec();
-
         for (CongViec i:congViecs) {
             i.setTinhTrang(tinhTrangRepository.findById(2L).orElse(null));
             congViecService.save(i);

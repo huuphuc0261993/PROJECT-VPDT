@@ -24,6 +24,11 @@ public class NhanvienServiceImpl implements NhanVienService {
     }
 
     @Override
+    public void save(NhanVien nhanVien) {
+        nhanVienRepository.save(nhanVien);
+    }
+
+    @Override
     public List<NhanVien> listNhanVien(Long mpb) {
         return nhanVienRepository.listNhanVien(mpb);
     }

@@ -24,8 +24,9 @@ public class CongViec {
     private Long id;
 
     @NotNull
-
+    @Column(columnDefinition="TEXT")
     private String tenCongViec;
+    @Column(columnDefinition="TEXT")
     private String noiDung;
 
     private Date ngayBatDau;

@@ -8,17 +8,16 @@
 </head>
 <body>
 <header th:replace="layoutUser::topBarUser"></header>
-
 <div>
     <div id="layoutSidenav">
         <div th:replace="layoutUser::sidebarUser"></div>
         <div id="layoutSidenav_content">
 
-            <main class="container">
+            <main>
                 <form class="container-form" id="myform" name="myform">
                     <div class="card mb-4">
                         <div class="card-header">
-                           <i class="far fa-compass mr-1"></i>
+                            <i class="far fa-compass mr-1"></i>
                             <b>Công việc được giao</b>
 
                         </div>
@@ -26,7 +25,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                    <tr>
+                                    <tr role="row">
                                         <th>Công Việc</th>
                                         <th>Ngày bắt đầu</th>
                                         <th>Ngày hoàn thành</th>
@@ -45,10 +44,7 @@
         </div>
     </div>
 </div>
-
 <footer th:replace="layoutUser::bottomBarUser"></footer>
-
-
 <th:block th:replace="layoutUser::jsAllUser"></th:block>
 <script type="text/javascript" th:src="@{/js/user/duocgiao.js}"></script>
 </body>

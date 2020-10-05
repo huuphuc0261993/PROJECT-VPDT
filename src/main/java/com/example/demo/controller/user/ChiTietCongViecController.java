@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class ChiTietCongViecController {
@@ -19,8 +22,13 @@ public class ChiTietCongViecController {
     @GetMapping("/chitietcongviec/{id}")
     public ModelAndView getView(@PathVariable("id")Long id) {
         ChiTiet chiTiet = chiTietService.findById(id);
+        Long idCongViec = chiTiet.getCongViec().getId();
+        List<String> nhanVienLamViec = chiTietService.nhanVienLamViec(idCongViec);
+        ChiTiet nhanVienLamChinh = chiTietService.nhanVienChinh(idCongViec,1L);
         ModelAndView modelAndView = new ModelAndView("/user/ChiTietCongViec");
         modelAndView.addObject("chiTiets",chiTiet);
+        modelAndView.addObject("nhanVienLamViec",nhanVienLamViec);
+        modelAndView.addObject("nhanVienChinh",nhanVienLamChinh);
         return modelAndView;
     }
 

@@ -20,27 +20,38 @@
                         <th:block th:each="item:${chiTiets}">
                             <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active" th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>
+                                <li class="breadcrumb-item active"
+                                    th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>
                             </ol>
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <p class="mb-0">
-                                        This page is an example of using static navigation. By removing the
-                                        <code>.sb-nav-fixed</code>
-                                        class from the
-                                        <code>body</code>
-                                        , the top navigation and side navigation will become static on scroll. Scroll
-                                        down this page to see an example.
+                                    <b>Nội dung:</b>
+                                    <p class="mb-0" th:text="${item.congViec.noiDung}">
                                     </p>
+                                    <b>Thời gian hoàn thành:</b>
+                                    <p class="mb-0"
+                                       th:text="${item.congViec.ngayBatDau}+' đến '+${item.congViec.ngayKetThuc}">
+                                    </p>
+                                    <th:block th:each="items:${nhanVienChinh}">
+                                        <b>Nhân viên thực hiện chính:</b>
+                                        <p class="mb-0" th:text="${items.nhanVien.fullName}">
+                                        </p>
+                                    </th:block>
+                                    <b>Thành viên cùng tham gia:</b>
+                                    <th:block th:each="item:${nhanVienLamViec}">
+                                        <p class="mb-0" th:utext="${item}">
+                                        </p>
+                                    </th:block>
                                 </div>
                             </div>
-                            <div style="height: 100vh;"></div>
+                            <div style="height: 10vh;"></div>
                             <div class="card mb-4">
                                 <div class="card-body">When scrolling, the navigation stays at the top of the page. This
                                     is the end of the static navigation demo.
                                 </div>
                             </div>
                         </th:block>
+
                     </div>
                 </form>
             </main>

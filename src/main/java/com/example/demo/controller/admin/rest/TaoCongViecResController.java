@@ -47,7 +47,7 @@ public class TaoCongViecResController {
 
 
 //        ép kiểu từ int lên long
-        ChiTiet chiTiet = new ChiTiet();
+
 
         List<Integer> idNhanVien=taoCongViecView.getTatCaNhanVien();
         List<Long> idNhanVienLong = new ArrayList<>();
@@ -59,7 +59,7 @@ public class TaoCongViecResController {
 // save nhân viên tại bảng chi tiết
         List<ChiTiet> chiTiets = new ArrayList<>();
         for (Long i:idNhanVienLong) {
-            chiTiet = new ChiTiet();
+            ChiTiet chiTiet = new ChiTiet();
             if(i == taoCongViecView.getNvChinh()){
                 chiTiet.setNvChinh(1);
             }
@@ -68,7 +68,9 @@ public class TaoCongViecResController {
             chiTiets.add(chiTiet);
         }
         congViec.setChiTietCongViecList(chiTiets);
+
         congViecService.save(congViec);
+
         return HttpStatus.OK;
     }
 

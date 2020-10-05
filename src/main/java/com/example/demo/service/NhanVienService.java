@@ -12,7 +12,7 @@ import java.util.List;
 public interface NhanVienService {
     Iterable<NhanVien>findAllByIsDeletedEquals(int isDeleted);
     NhanVien findByUsername(String username);
-
+    void save(NhanVien nhanVien);
     List<NhanVien> listNhanVien(@Param("mpb")Long mpb);
     NhanVien findById(Long id);
 

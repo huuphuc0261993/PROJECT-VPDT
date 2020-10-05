@@ -6,6 +6,8 @@ import com.example.demo.service.ChiTietService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChiTietServiceImpl implements ChiTietService {
     @Autowired
@@ -23,6 +25,16 @@ public class ChiTietServiceImpl implements ChiTietService {
     @Override
     public ChiTiet findById(Long id) {
         return chiTietRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<String> nhanVienLamViec(Long cong_viec_id) {
+        return chiTietRepository.nhanVienLamViec(cong_viec_id);
+    }
+
+    @Override
+    public ChiTiet nhanVienChinh(Long cong_viec_id, Long nv_chinh) {
+        return chiTietRepository.nhanVienChinh(cong_viec_id,nv_chinh);
     }
 
 //    @Override

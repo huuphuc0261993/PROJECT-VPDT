@@ -59,24 +59,37 @@ public class NhanVienResController {
         return HttpStatus.OK;
     }
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-    public ResponseEntity<NhanVien>edit(@PathVariable("id")Long id){
+    public NhanVien edit(@PathVariable("id")Long id){
         NhanVien nhanVien = nhanVienService.findById(id);
         if (nhanVien == null) {
             System.out.println("Nhan vien with id " + id + " not found");
-            return new ResponseEntity<NhanVien>(HttpStatus.NOT_FOUND);
-        }
-        try {
-            nhanVienService.save(nhanVien);
-        }catch (Exception ex){
-            return new ResponseEntity<NhanVien>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return null;
         }
 
-        return new ResponseEntity<NhanVien>(nhanVien, HttpStatus.OK);
+        return nhanVien;
     }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
     public HttpStatus edit(@RequestBody NhanVien nhanVien, @PathVariable("id")Long id){
         nhanVien.setPhongBan(phongBanService.findById(id));
+
+        BCryptPasswordEncoder encoder =  new BCryptPasswordEncoder();
+        String rawPassword = nhanVien.getPassword();;
+        String encodePassword =  encoder.encode(rawPassword);
+        nhanVien.setPassword(encodePassword);
+
         nhanVienService.save(nhanVien);
         return HttpStatus.OK;
+    }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public ResponseEntity<NhanVien> softDelete(@PathVariable("id") long id) {
+        NhanVien nhanVien = nhanVienService.findById(id);
+        nhanVien.setIsDeleted(1);
+        nhanVienService.save(nhanVien);
+        if (nhanVien == null) {
+
+            return new ResponseEntity<NhanVien>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<NhanVien>(nhanVien, HttpStatus.OK);
     }
 }

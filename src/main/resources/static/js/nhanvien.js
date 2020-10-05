@@ -1,27 +1,26 @@
 var nhanvien = nhanvien || {}
 
-nhanvien.showTitle = function (){
+nhanvien.showTitle = function () {
     $.ajax(
         {
-            url: urlPathHost+'/api/nhanvien/view' ,
+            url: urlPathHost + '/api/nhanvien/view',
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
-            success: function (data){
+            success: function (data) {
                 let t = $('#dataTable').DataTable({
                     responsive: true
                 });
                 // index chỉ mục mảng , value giá trị của phần tử mảng
-                $.each(data, function( index, value ) {
-                    t.row.add( [
+                $.each(data, function (index, value) {
+                    t.row.add([
                         value.username,
                         value.fullName,
                         value.phongBan.tenPB,
                         value.email,
                         value.phone,
-                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit("+value.mnv+")'></i>"+
-                        "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete("+value.mpb+")'></i>"+
-                        "<i class='fas fa-power-off ' title='Xóa' onclick='nhanvien.delete("+value.mpb+")'></i>"
+                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit(" + value.mnv + ")'></i>" +
+                        "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete(" + value.mnv + ")'></i>"
                     ]).draw();
                 });
 
@@ -40,7 +39,7 @@ nhanvien.listphongban = function () {
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                console.log(data);
+
                 // phongBanList = data;
                 $('#department').html("<option disabled selected>--/--</option>");
                 // index chỉ mục mảng , value giá trị của phần tử mảng
@@ -51,12 +50,10 @@ nhanvien.listphongban = function () {
                 });
             },
             error: function (e) {
-                console.log(e);
                 console.log(e.message);
             }
         }).done(function (data) {
         // If successful
-        console.log(data);
     })
 }
 
@@ -68,15 +65,12 @@ nhanvien.save = function () {
     nhanvienObject.password = $('#password').val();
     nhanvienObject.fullName = $('#fullName').val();
     nhanvienObject.department = $('#department').val();
-    console.log(nhanvienObject.department);
     nhanvienObject.phone = $('#phone').val();
     nhanvienObject.avatar = $('#exampleFormControlFile1').val();
 
-    console.log(nhanvienObject);
-    if ( nhanvienObject.mnv === "") {
-        console.log('quay lai');
+    if (nhanvienObject.mnv === "") {
         $.ajax({
-            url: urlPathHost+'/api/nhanvien/create/'+nhanvienObject.department,
+            url: urlPathHost + '/api/nhanvien/create/' + nhanvienObject.department,
             method: 'POST',
             dataType: 'JSON',
             contentType: 'application/json',
@@ -90,11 +84,10 @@ nhanvien.save = function () {
                 nhanvien.showTitle();
             }
         })
-    }
-    else {
+    } else {
 
         $.ajax({
-            url: urlPathHost+"/api/nhanvien/edit/" + nhanvienObject.department,
+            url: urlPathHost + "/api/nhanvien/edit/" + nhanvienObject.department,
             method: "PUT",
             dataType: "json",
             contentType: "application/json",
@@ -111,15 +104,14 @@ nhanvien.save = function () {
     }
 }
 
-nhanvien.edit = function(mnv){
-    console.log('get :'+ mnv);
-
+nhanvien.edit = function (mnv) {
+    console.log("get: " + mnv)
     $.ajax({
-        url : urlPathHost+"/api/nhanvien/edit/" + mnv,
-        method : "GET",
-        dataType : "json",
-        success : function(data){
-            console.log(data);
+        url: urlPathHost + "/api/nhanvien/edit/" + mnv,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+            console.log("day la " + data);
             $('#myform')[0].reset();
             // //
             $('#exampleModalLabel').html("Chỉnh sửa thông tin");
@@ -130,16 +122,53 @@ nhanvien.edit = function(mnv){
             $('#email').val(data.email);
             $('#password').val(data.password);
             $('#fullName').val(data.fullName);
-            $('#department').val(data.department);
+
+            $('#department').val(data.phongBan.mpb);
+            // console.log(data.phongBan.tenPB);
+
             $('#phone').val(data.phone);
             // $('#exampleFormControlFile1').val(data.avatar);
             $('#exampleModal').modal('show');
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);
 
+        },
+        done: function (data){
+            console.log(data);
         }
     });
 };
+
+nhanvien.delete = function (id) {
+    bootbox.confirm({
+        title: "Xóa nhân viên",
+        message: "Bạn có muốn xóa ko?",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> No'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Yes',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                $.ajax({
+                    url: urlPathHost+"/api/nhanvien/delete/" + id,
+                    method: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#tBody').empty();
+                        $('#dataTable').dataTable().fnClearTable();
+                        $('#dataTable').dataTable().fnDestroy();
+                        nhanvien.showTitle();
+                    }
+                });
+            }
+        }
+    });
+}
 nhanvien.resetForm = function () {
     $('#myform')[0].reset();
     $('#tenPB').val('');

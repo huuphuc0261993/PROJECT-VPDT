@@ -22,7 +22,7 @@ public class NhanVien {
     private String email;
     private String password;
     private String fullName;
-    private int phone;
+    private String phone;
     private String avatar;
     private String roles="USER";
     private int enabled = 1;
@@ -109,11 +109,11 @@ public class NhanVien {
         this.fullName = fullName;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

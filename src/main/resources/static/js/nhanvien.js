@@ -1,4 +1,5 @@
 var nhanvien = nhanvien || {}
+
 nhanvien.showTitle = function (){
     $.ajax(
         {
@@ -18,7 +19,7 @@ nhanvien.showTitle = function (){
                         value.phongBan.tenPB,
                         value.email,
                         value.phone,
-                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit("+value.mpb+")'></i>"+
+                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit("+value.mnv+")'></i>"+
                         "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete("+value.mpb+")'></i>"+
                         "<i class='fas fa-power-off ' title='Xóa' onclick='nhanvien.delete("+value.mpb+")'></i>"
                     ]).draw();
@@ -70,6 +71,7 @@ nhanvien.save = function () {
     console.log(nhanvienObject.department);
     nhanvienObject.phone = $('#phone').val();
     nhanvienObject.avatar = $('#exampleFormControlFile1').val();
+
     console.log(nhanvienObject);
     if ( nhanvienObject.mnv === "") {
         console.log('quay lai');
@@ -89,38 +91,48 @@ nhanvien.save = function () {
             }
         })
     }
-    // else {
-    //     $.ajax({
-    //         url: urlPathHost+"/api/nhanvien/edit" ,
-    //         method: "PUT",
-    //         dataType: "json",
-    //         contentType: "application/json",
-    //         data: JSON.stringify(nhanvienObject),
-    //         success: function () {
-    //             $('#exampleModal').modal('hide');
-    //             $('#tBody').empty();
-    //             $('#dataTable').dataTable().fnClearTable();
-    //             $('#dataTable').dataTable().fnDestroy();
-    //             nhanvien.showTitle();
-    //
-    //         },
-    //     });
-    // }
+    else {
+
+        $.ajax({
+            url: urlPathHost+"/api/nhanvien/edit/" + nhanvienObject.department,
+            method: "PUT",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(nhanvienObject),
+            success: function () {
+                $('#exampleModal').modal('hide');
+                $('#tBody').empty();
+                $('#dataTable').dataTable().fnClearTable();
+                $('#dataTable').dataTable().fnDestroy();
+                nhanvien.showTitle();
+
+            },
+        });
+    }
 }
-nhanvien.edit = function(mpb){
-    console.log('get :'+ mpb);
+
+nhanvien.edit = function(mnv){
+    console.log('get :'+ mnv);
+
     $.ajax({
-        url : urlPathHost+"/api/nhanvien/edit/" + mpb,
+        url : urlPathHost+"/api/nhanvien/edit/" + mnv,
         method : "GET",
         dataType : "json",
         success : function(data){
             console.log(data);
             $('#myform')[0].reset();
             // //
-            $('#exampleModalLabel').html("Chỉnh sửa phòng ban");
+            $('#exampleModalLabel').html("Chỉnh sửa thông tin");
             $('#modal-form-1').html("Sửa");
-            $('#id').val(data.mpb);
-            $('#tenPB').val(data.tenPB);
+
+            $('#id').val(data.mnv);
+            $('#username').val(data.username);
+            $('#email').val(data.email);
+            $('#password').val(data.password);
+            $('#fullName').val(data.fullName);
+            $('#department').val(data.department);
+            $('#phone').val(data.phone);
+            // $('#exampleFormControlFile1').val(data.avatar);
             $('#exampleModal').modal('show');
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);

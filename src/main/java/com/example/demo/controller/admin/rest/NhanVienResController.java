@@ -4,7 +4,10 @@ import com.example.demo.model.NhanVien;
 import com.example.demo.model.PhongBan;
 import com.example.demo.model.ThongBao;
 import com.example.demo.service.NhanVienService;
+import com.example.demo.service.PhongBanService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +22,8 @@ import java.util.List;
 public class NhanVienResController {
     @Autowired
     private NhanVienService nhanVienService;
+    @Autowired
+    private PhongBanService phongBanService;
 
     @RequestMapping(value = "/view/{id}",method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<NhanVien>> showView(@PathVariable("id")Long id){
@@ -41,16 +46,16 @@ public class NhanVienResController {
         }
         return new ResponseEntity<Iterable<NhanVien>>(nhanViens, HttpStatus.OK);
     }
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public HttpStatus create(@RequestBody NhanVien nhanVien) {
+    @RequestMapping(value = "/create/{id}", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public HttpStatus create(@RequestBody NhanVien nhanVien, @PathVariable("id") Long id) {
 
         BCryptPasswordEncoder encoder =  new BCryptPasswordEncoder();
         String rawPassword = nhanVien.getPassword();;
         String encodePassword =  encoder.encode(rawPassword);
-        System.out.println(encodePassword);
         nhanVien.setPassword(encodePassword);
-        
+        nhanVien.setPhongBan(phongBanService.findById(id));
         nhanVienService.save(nhanVien);
+        
         return HttpStatus.OK;
     }
 

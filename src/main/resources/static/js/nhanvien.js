@@ -67,12 +67,14 @@ nhanvien.save = function () {
     nhanvienObject.password = $('#password').val();
     nhanvienObject.fullName = $('#fullName').val();
     nhanvienObject.department = $('#department').val();
+    console.log(nhanvienObject.department);
     nhanvienObject.phone = $('#phone').val();
-    nhanvienObject.exampleFormControlFile1 = $('#exampleFormControlFile1').val();
+    nhanvienObject.avatar = $('#exampleFormControlFile1').val();
     console.log(nhanvienObject);
-    if ($("id").val() === null) {
+    if ( nhanvienObject.mnv === "") {
+        console.log('quay lai');
         $.ajax({
-            url: urlPathHost+'/api/nhanvien/create',
+            url: urlPathHost+'/api/nhanvien/create/'+nhanvienObject.department,
             method: 'POST',
             dataType: 'JSON',
             contentType: 'application/json',

@@ -24,7 +24,7 @@ public class NhanVien {
     private String fullName;
     private int phone;
     private String avatar;
-    private String roles="ADMIN";
+    private String roles="USER";
     private int enabled = 1;
 
     @OneToMany(mappedBy = "nhanVien")

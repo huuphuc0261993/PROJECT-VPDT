@@ -32,7 +32,7 @@ public class CongViec {
     private Date ngayBatDau;
     private Date ngayKetThuc;
 
-    @OneToMany(mappedBy = "congViec")
+    @OneToMany(mappedBy = "congViec", cascade=CascadeType.ALL)
     @JsonIgnore
     private List<ChiTiet> chiTietList;
 

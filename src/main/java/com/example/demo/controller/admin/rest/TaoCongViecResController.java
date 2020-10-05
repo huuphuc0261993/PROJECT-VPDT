@@ -66,6 +66,7 @@ public class TaoCongViecResController {
             chiTiet.setCongViec(congViec);
             chiTiet.setNhanVien(nhanVienRepository.findById(i).orElse(null));
             chiTiets.add(chiTiet);
+
         }
         congViec.setChiTietCongViecList(chiTiets);
 

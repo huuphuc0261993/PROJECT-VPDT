@@ -12,11 +12,10 @@
 <div>
     <div id="layoutSidenav">
         <div th:replace="layoutUser::sidebarUser"></div>
-        <div id="layoutSidenav_content">
-
-            <main class="container">
+        <div id="layoutSidenav_content" >
+            <main class="container ml-1">
                 <form class="container-form" id="myform" name="myform">
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="width: 95%">
                         <th:block th:each="item:${chiTiets}">
                             <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
                             <ol class="breadcrumb mb-4">
@@ -42,11 +41,54 @@
                                         <p class="mb-0" th:utext="${item}">
                                         </p>
                                     </th:block>
+
+                                    <div class="form-element">
+                                        <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo
+                                            cáo
+                                            và trao đổi:</b></label><br>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                  rows="5"></textarea>
+                                    </div>
+                                    <div style="height: 2vh;"></div>
+                                    <div class="modal-footer-btn">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <button type="button"
+                                                                class="btn btn btn-danger btn-action mr-1"
+                                                                data-dismiss="modal" id="modal-form-1"
+                                                                style="width: 105%"
+                                                        >Gửi
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-9 custom-file mb-3">
+                                                        <input type="file" class="custom-file-input" id="customFile"
+                                                               name="filename">
+                                                        <label class="custom-file-label" for="customFile">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-7" style="text-align: right">
+                                                <button type="button" class="btn btn-primary btn-action"
+                                                        id="modal-form-3" style="margin-top: -5px; width: 200px"
+                                                >Gia hạn
+                                                </button>
+                                                <input type="date" style="height: 70%">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
                             <div style="height: 10vh;"></div>
                             <div class="card mb-4">
-                                <div class="card-body">When scrolling, the navigation stays at the top of the page. This
+                                <div class="card-body">When scrolling, the navigation stays at the top of the page.
+                                    This
                                     is the end of the static navigation demo.
                                 </div>
                             </div>
@@ -56,14 +98,24 @@
                 </form>
             </main>
         </div>
+        <div style="margin-top: 5%">
+            <button type="button" class="btn btn-primary">Primary</button><br>
+            <button type="button" class="btn btn-secondary">Secondary</button>
+        </div>
     </div>
-</div>
 
-<footer th:replace="layoutUser::bottomBarUser"></footer>
+    <footer th:replace="layoutUser::bottomBarUser"></footer>
 
 
-<th:block th:replace="layoutUser::jsAllUser"></th:block>
-<script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
+    <th:block th:replace="layoutUser::jsAllUser"></th:block>
+    <script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 
 </html>

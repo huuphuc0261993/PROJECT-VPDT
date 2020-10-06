@@ -66,7 +66,6 @@ nhanvien.save = function () {
     nhanvienObject.fullName = $('#fullName').val();
     nhanvienObject.department = $('#department').val();
     nhanvienObject.phone = $('#phone').val();
-    nhanvienObject.avatar = $('#exampleFormControlFile1').val();
 
     if (nhanvienObject.mnv === "") {
         $.ajax({
@@ -125,9 +124,7 @@ nhanvien.edit = function (mnv) {
 
             $('#department').val(data.phongBan.mpb);
             // console.log(data.phongBan.tenPB);
-
             $('#phone').val(data.phone);
-            // $('#exampleFormControlFile1').val(data.avatar);
             $('#exampleModal').modal('show');
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);

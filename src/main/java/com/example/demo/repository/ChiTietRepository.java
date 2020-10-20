@@ -25,4 +25,6 @@ public interface ChiTietRepository extends PagingAndSortingRepository<ChiTiet, L
     List<String> nhanVienLamViec(@Param("cong_viec_id")Long cong_viec_id);
     @Query(value = "select*from chi_tiet where cong_viec_id = :cong_viec_id and nv_chinh = :nv_chinh", nativeQuery = true)
     ChiTiet nhanVienChinh(@Param("cong_viec_id")Long cong_viec_id,@Param("nv_chinh")Long nv_chinh);
+    @Query(value = "select*from chi_tiet where cong_viec_id = :cong_viec_id and is_deleted = 0", nativeQuery = true)
+    List<ChiTiet> showCongViec(@Param("cong_viec_id")Long cong_viec_id);
 }

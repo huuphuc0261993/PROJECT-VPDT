@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import org.springframework.web.servlet.View;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -17,7 +18,10 @@ public class ChiTiet{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int nvChinh = 0;
-
+    @NotNull
+    @Column(columnDefinition="TEXT")
+    private String baoCao;
+    private String file;
 
     @ManyToOne
     @JoinColumn(name = "nhanVien_id")
@@ -139,6 +143,22 @@ public class ChiTiet{
 
     public void setCreated_by(String created_by) {
         this.created_by = created_by;
+    }
+
+    public String getBaoCao() {
+        return baoCao;
+    }
+
+    public void setBaoCao(String baoCao) {
+        this.baoCao = baoCao;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
 

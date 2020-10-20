@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:replace="layoutUser::cssAllUser"></th:block>
+    <link rel="stylesheet" th:href="@{/css/user/styleUser.css}">
 
 </head>
 <body>
@@ -12,110 +13,166 @@
 <div>
     <div id="layoutSidenav">
         <div th:replace="layoutUser::sidebarUser"></div>
-        <div id="layoutSidenav_content" >
-            <main class="container ml-1">
-                <form class="container-form" id="myform" name="myform">
-                    <div class="container-fluid" style="width: 95%">
-                        <th:block th:each="item:${chiTiets}">
-                            <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active"
-                                    th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>
-                            </ol>
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <b>Nội dung:</b>
-                                    <p class="mb-0" th:text="${item.congViec.noiDung}">
-                                    </p>
-                                    <b>Thời gian hoàn thành:</b>
-                                    <p class="mb-0"
-                                       th:text="${item.congViec.ngayBatDau}+' đến '+${item.congViec.ngayKetThuc}">
-                                    </p>
-                                    <th:block th:each="items:${nhanVienChinh}">
-                                        <b>Nhân viên thực hiện chính:</b>
-                                        <p class="mb-0" th:text="${items.nhanVien.fullName}">
-                                        </p>
-                                    </th:block>
-                                    <b>Thành viên cùng tham gia:</b>
-                                    <th:block th:each="item:${nhanVienLamViec}">
-                                        <p class="mb-0" th:utext="${item}">
-                                        </p>
-                                    </th:block>
+        <div id="layoutSidenav_content">
+            <main>
+                <form class="container-form" id="myform" name="myform" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="container-fluid">
+                                <th:block th:each="item:${chiTiets}">
+                                    <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
+                                    <ol class="breadcrumb mb-4">
+                                        <li class="breadcrumb-item active"
+                                            th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>
+                                    </ol>
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <b>Nội dung:</b>
+                                            <p class="mb-0" th:text="${item.congViec.noiDung}">
+                                            </p>
+                                            <b>Thời gian hoàn thành:</b>
+                                            <p class="mb-0"
+                                               th:text="${item.congViec.ngayBatDau}+' đến '+${item.congViec.ngayKetThuc}">
+                                            </p>
+                                            <th:block th:each="items:${nhanVienChinh}">
+                                                <b>Nhân viên thực hiện chính:</b>
+                                                <p class="mb-0" th:text="${items.nhanVien.fullName}">
+                                                </p>
+                                            </th:block>
+                                            <b>Thành viên cùng tham gia:</b>
+                                            <th:block th:each="item:${nhanVienLamViec}">
+                                                <p class="mb-0" th:utext="${item}">
+                                                </p>
+                                            </th:block>
+                                            <div class="form-element">
+                                                <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo
+                                                    cáo:</b></label><br>
 
-                                    <div class="form-element">
-                                        <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo
-                                            cáo
-                                            và trao đổi:</b></label><br>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                  rows="5"></textarea>
-                                    </div>
-                                    <div style="height: 2vh;"></div>
-                                    <div class="modal-footer-btn">
-                                        <div class="row">
-                                            <div class="col-5">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                          rows="5"></textarea>
+                                            </div>
+                                            <div style="height: 2vh;"></div>
+                                            <div class="modal-footer-btn">
                                                 <div class="row">
-                                                    <div class="col-3">
-                                                        <button type="button"
-                                                                class="btn btn btn-danger btn-action mr-1"
-                                                                data-dismiss="modal" id="modal-form-1"
-                                                                style="width: 105%"
-                                                        >Gửi
-                                                        </button>
+                                                    <div class="col-5">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <button type="button"
+                                                                        class="btn btn btn-danger btn-action mr-1"
+                                                                        data-dismiss="modal" id="modal-form-1"
+                                                                        style="width: 105%"
+                                                                        onclick="chitietcongviec.send()"
+                                                                >Gửi
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-9 custom-file mb-3">
+                                                                <input type="file" class="custom-file-input filename"
+                                                                       id="customFile"
+                                                                       name="filename">
+                                                                <label class="custom-file-label" for="customFile">Choose
+                                                                    file</label>
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
-                                                    <div class="col-9 custom-file mb-3">
-                                                        <input type="file" class="custom-file-input" id="customFile"
-                                                               name="filename">
-                                                        <label class="custom-file-label" for="customFile">Choose
-                                                            file</label>
+                                                    <div class="col-7" style="text-align: right">
+                                                        <button type="button" class="btn btn-primary btn-action"
+                                                                id="modal-form-3" style="margin-top: -5px; width: 200px"
+                                                        >Gia hạn
+                                                        </button>
+                                                        <input type="date" style="height: 70%">
                                                     </div>
                                                 </div>
 
 
                                             </div>
-                                            <div class="col-7" style="text-align: right">
-                                                <button type="button" class="btn btn-primary btn-action"
-                                                        id="modal-form-3" style="margin-top: -5px; width: 200px"
-                                                >Gia hạn
-                                                </button>
-                                                <input type="date" style="height: 70%">
+                                        </div>
+                                    </div>
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <i class="f as fa-table mr-1"></i>
+                                            BÁO CÁO
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered " id="dataTable" width="100%"
+                                                       cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+<!--                                                        <th>Tên công việc</th>-->
+                                                        <th style="width: 30%">Người báo cáo</th>
+                                                        <th style="width: 66%">Báo cáo</th>
+                                                        <th style="width: 4%">File</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="tBody">
+                                                    <!-- Modal HTML -->
+                                                    <th:block th:each="item : ${listChiTiet}">
+                                                        <tr>
+<!--                                                            <td th:text="${item.congViec.tenCongViec}"></td>-->
+                                                            <td th:text="${item.nhanVien.fullName}"></td>
+                                                            <td th:text="${item.baoCao}"></td>
+
+                                                            <td>
+                                                                <th:block th:if="${item.file != null}">
+                                                                <button th:value="${item.file}"
+                                                                        onclick="downLoadFile(this.value)" class="btn btn-sm"><i class="fa fa-download"></i>
+                                                                </button>
+                                                            </th:block>
+
+                                                            </td>
+                                                            <!--                                                            <td th:text="${item.file}"></td>-->
+                                                            </td>
+                                                        </tr>
+                                                    </th:block>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-
-
                                     </div>
-                                </div>
+                                </th:block>
                             </div>
-                            <div style="height: 10vh;"></div>
-                            <div class="card mb-4">
-                                <div class="card-body">When scrolling, the navigation stays at the top of the page.
-                                    This
-                                    is the end of the static navigation demo.
-                                </div>
+                        </div>
+                        <div class="col-2 btn-custom">
+                            <div>
+                                <button type="button" class="btn btn-info mt-5">Chuyển giao công việc</button>
                             </div>
+                            <div>
+                                <button type="button" class="btn btn-info">Đề xuất kết thúc</button>
+                            </div>
+                        </div>
+                        <th:block th:each="item:${chiTiets}">
+                            <input id="idChiTiet" type="hidden" th:value="${item.id}">
                         </th:block>
-
                     </div>
                 </form>
             </main>
         </div>
-        <div style="margin-top: 5%">
-            <button type="button" class="btn btn-primary">Primary</button><br>
-            <button type="button" class="btn btn-secondary">Secondary</button>
-        </div>
     </div>
+</div>
+<footer th:replace="layoutUser::bottomBarUser"></footer>
 
-    <footer th:replace="layoutUser::bottomBarUser"></footer>
 
+<th:block th:replace="layoutUser::jsAllUser"></th:block>
+<script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 
-    <th:block th:replace="layoutUser::jsAllUser"></th:block>
-    <script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
-    <script>
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script>
+    function downLoadFile(url) {
+            var file_path = 'http://localhost:8080/upload/' + url;
+            var a = document.createElement('A');
+            a.href = file_path;
+            a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+    }
+</script>
 </body>
 
 </html>

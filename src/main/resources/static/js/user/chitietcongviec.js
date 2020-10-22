@@ -1,6 +1,7 @@
 var chitietcongviec = chitietcongviec || {}
 
 chitietcongviec.send = function (){
+
     var id;
     id = $("#idChiTiet").val();
         var formData = new FormData();
@@ -29,67 +30,108 @@ chitietcongviec.send = function (){
             }
         });
 }
-// chitietcongviec.showTitle = function () {
-//     $.ajax(
-//         {
-//             url: urlPathHost + '/api/nhanvien/view',
-//             method: 'GET',
-//             dataType: 'json',
-//             contentType: 'application/json',
-//             success: function (data) {
-//                 let t = $('#dataTable').DataTable({
-//                     responsive: true
-//                 });
-//                 // index chỉ mục mảng , value giá trị của phần tử mảng
-//                 $.each(data, function (index, value) {
-//                     t.row.add([
-//                         value.username,
-//                         value.fullName,
-//                         value.phongBan.tenPB,
-//                         value.email,
-//                         value.phone,
-//                         "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit(" + value.mnv + ")'></i>" +
-//                         "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete(" + value.mnv + ")'></i>"
-//                     ]).draw();
-//                 });
-//
-//
-//             },
-//             error: function (e) {
-//                 console.log(e.message);
-//             }
-//         })
-// }
-// chitietcongviec.showBaoCao = function () {
-//     $.ajax(
-//         {
-//             url: urlPathHost + '/api/chitietcongviec/view/'+id,
-//             method: 'GET',
-//             dataType: 'json',
-//             contentType: 'application/json',
-//             success: function (data) {
-//                 console.log(data);
-//                 let t = $('#dataTable').DataTable({
-//                     responsive: true
-//                 });
-//                 // index chỉ mục mảng , value giá trị của phần tử mảng
-//                 $.each(data, function (index, value) {
-//                     console.log(value);
-//                     t.row.add([
-//                         value.congViec.tenCongViec,
-//                         value.baoCao,
-//                         value.baoCao,
-//                         value.file
-//                     ]).draw();
-//                 });
-//
-//
-//             },
-//             error: function (e) {
-//                 console.log(e.message);
-//             }
-//         })
-// }
+chitietcongviec.giaHan = function () {
+    var id;
+    var giaHanObject = {
+        ngayGiaHan: '',
+        ngayKetThuc:''
+    };
+    giaHanObject.ngayGiaHan = ($('#giaHan').val());
+    giaHanObject.ngayKetThuc = ($('#ngayKetThuc').val());
+    var ngayKetThuc = new Date(giaHanObject.ngayKetThuc);
+    var ngayGiaHan = new Date(giaHanObject.ngayGiaHan);
+    id = $("#idChiTiet").val();
+
+    if(ngayGiaHan > ngayKetThuc){
+        $.ajax({
+            url: urlPathHost+"/api/chitietcongviec/giaHan/"+id,
+            method: "PUT",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(giaHanObject),
+            success: function () {
+                console.log("POST DONE");
+                bootbox.alert({
+                    title: "Gia Hạn",
+                    message: "Yêu cầu của bạn đang chờ xét duyệt!",
+                    backdrop: true,
+                });
+            },
+        });
+    }else {
+        bootbox.alert({
+            message: "Ngày gia hạn không được nhỏ hơn ngày hoàn thành",
+            backdrop: true,
+        });
+    }
+
+}
+
+chitietcongviec.chuyenGiao = function () {
+    // var id;
+    // var giaHanObject = {
+    //     ngayGiaHan: '',
+    //     ngayKetThuc:''
+    // };
+    // giaHanObject.ngayGiaHan = ($('#giaHan').val());
+    // giaHanObject.ngayKetThuc = ($('#ngayKetThuc').val());
+    // var ngayKetThuc = new Date(giaHanObject.ngayKetThuc);
+    // var ngayGiaHan = new Date(giaHanObject.ngayGiaHan);
+    // id = $("#idChiTiet").val();
+    //
+    // if(ngayGiaHan > ngayKetThuc){
+    //     $.ajax({
+    //         url: urlPathHost+"/api/chitietcongviec/giaHan/"+id,
+    //         method: "PUT",
+    //         dataType: "json",
+    //         contentType: "application/json",
+    //         data: JSON.stringify(giaHanObject),
+    //         success: function () {
+    //             console.log("POST DONE");
+    //             bootbox.alert({
+    //                 title: "Gia Hạn",
+    //                 message: "Yêu cầu của bạn đang chờ xét duyệt!",
+    //                 backdrop: true,
+    //             });
+    //         },
+    //     });
+    // }else {
+    //     bootbox.alert({
+    //         message: "Ngày gia hạn không được nhỏ hơn ngày hoàn thành",
+    //         backdrop: true,
+    //     });
+    // }
+
+}
+chitietcongviec.deXuatKetThuc = function () {
+    var id;
+    id = $("#idChiTiet").val();
+    bootbox.confirm({
+        title: "Đề xuất kết thúc công việc",
+        message: "Bạn có muốn kết thúc công việc?",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Hủy'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Có',
+                className: 'btn-success'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                $.ajax({
+                    url: urlPathHost+"/api/chitietcongviec/dexuat/" + id,
+                    method: "PUT",
+                    dataType: "json",
+                    success: function () {
+                        console.log("POST DONE");
+                    }
+                });
+            }
+        }
+    });
+}
 $(document).ready(function () {
 
     // chitietcongviec.showBaoCao();

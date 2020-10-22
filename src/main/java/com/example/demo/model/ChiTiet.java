@@ -18,10 +18,13 @@ public class ChiTiet{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int nvChinh = 0;
-    @NotNull
+
     @Column(columnDefinition="TEXT")
     private String baoCao;
     private String file;
+    private LocalDate ngayBaoCao;
+    private LocalDate ngayGiaHan;
+    private int thongTinChuyenGiao;
 
     @ManyToOne
     @JoinColumn(name = "nhanVien_id")
@@ -159,6 +162,35 @@ public class ChiTiet{
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public LocalDate getNgayBaoCao() {
+        return ngayBaoCao;
+    }
+
+    public void setNgayBaoCao(LocalDate ngayBaoCao) {
+        this.ngayBaoCao = ngayBaoCao;
+    }
+
+    public LocalDate getNgayGiaHan() {
+        return ngayGiaHan;
+    }
+
+    public void setNgayGiaHan(LocalDate ngayGiaHan) {
+        this.ngayGiaHan = ngayGiaHan;
+    }
+
+    public int getThongTinChuyenGiao() {
+        return thongTinChuyenGiao;
+    }
+
+    public void setThongTinChuyenGiao(int thongTinChuyenGiao) {
+        this.thongTinChuyenGiao = thongTinChuyenGiao;
+    }
+
+    public boolean checked(){
+        LocalDate nowDate = LocalDate.now();
+        return Date.valueOf(congViec.getNgayKetThuc().toString()).getTime()<Date.valueOf(nowDate.toString()).getTime();
     }
 }
 

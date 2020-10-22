@@ -14,7 +14,7 @@
         <div id="layoutSidenav_content">
 
             <main>
-                <form id="myform">
+                <form id="myform" class="needs-validation" novalidate>
 
                     <button type="button" class="btn btn-dark pr-5 pl-5 ml-3 mt-3 mb-3" data-toggle="modal" data-target="#exampleModal" style="border-radius: 0" onclick="thongbao.addNew()">Tạo thông báo</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,9 +45,6 @@
                         </div>
                     </div>
                 </form>
-
-
-
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="f as fa-table mr-1"></i>
@@ -65,7 +62,6 @@
                                 </thead>
                                 <tbody id="tBody">
                                                                 <!-- Modal HTML -->
-
                                 </tbody>
                             </table>
                         </div>

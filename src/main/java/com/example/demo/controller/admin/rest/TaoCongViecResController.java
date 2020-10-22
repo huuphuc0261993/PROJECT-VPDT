@@ -48,7 +48,6 @@ public class TaoCongViecResController {
 
 //        ép kiểu từ int lên long
 
-
         List<Integer> idNhanVien=taoCongViecView.getTatCaNhanVien();
         List<Long> idNhanVienLong = new ArrayList<>();
         System.out.println(taoCongViecView);
@@ -69,8 +68,9 @@ public class TaoCongViecResController {
 
         }
         congViec.setChiTietCongViecList(chiTiets);
-
+        congViec.getChiTietCongViecList();
         congViecService.save(congViec);
+
 
         return HttpStatus.OK;
     }

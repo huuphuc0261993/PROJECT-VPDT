@@ -132,58 +132,61 @@ taocongviec.xoa = function (index) {
 //kiểm tra
 // document.querySelectorAll("input[name='iMain']")[0].checked
 
-        taocongviec.save = function () {
-            var congViecObject = {
-                tenCongViec: '',
-                noiDung: '',
-                ngayBatDau: '',
-                ngayKetThuc: '',
-                tatCaNhanVien: [],
-                nvChinh: ''
-            };
+taocongviec.save = function () {
+    var congViecObject = {
+        tenCongViec: '',
+        noiDung: '',
+        ngayBatDau: '',
+        ngayKetThuc: '',
+        tatCaNhanVien: [],
+        nvChinh: ''
+    };
 
-            let tmp = document.querySelectorAll("input[name='iMain']");
-            $.each(tmp, function (index, value) {
-                console.log(tmp[index].checked);
-                if (tmp[index].checked === true) {
-                    congViecObject.nvChinh = tmp[index].value;
-                }
-            });
-            congViecObject.tenCongViec = ($('#title-work').val());
-            congViecObject.noiDung = ($('#message-text').val());
-            congViecObject.ngayBatDau = ($('#start-day').val());
-            congViecObject.ngayKetThuc = ($('#end-day').val());
-            congViecObject.tatCaNhanVien = nhanVienLamViec;
-            console.log(congViecObject);
-            // $.ajax({
-            //     url: urlPathHost + "/api/taocongviec/create",
-            //     method: "POST",
-            //     dataType: "json",
-            //     contentType: "application/json",
-            //     data: JSON.stringify(congViecObject),
-            //     success: function () {
-            //         console.log("POST DONE");
-            //         $('#tBody').empty();
-            //         $('#dataTable').dataTable().fnClearTable();
-            //         $('#dataTable').dataTable().fnDestroy();
-            //
-            //     },error: function (e) {
-            //         console.log(e.message);
-            //     },
-            // });
-
-            $.ajax({
-                url: urlPathHost + "/api/taocongviec/create",
-                method: "POST",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(congViecObject),
-                success: function () {
-                    console.log("POST DONE");
-                    location.reload();
-                }
-            })
+    let tmp = document.querySelectorAll("input[name='iMain']");
+    $.each(tmp, function (index, value) {
+        console.log(tmp[index].checked);
+        if (tmp[index].checked === true) {
+            congViecObject.nvChinh = tmp[index].value;
         }
+    });
+    congViecObject.tenCongViec = ($('#title-work').val());
+    congViecObject.noiDung = ($('#message-text').val());
+    congViecObject.ngayBatDau = ($('#start-day').val());
+    congViecObject.ngayKetThuc = ($('#end-day').val());
+    congViecObject.tatCaNhanVien = nhanVienLamViec;
+    console.log(congViecObject);
+    // $.ajax({
+    //     url: urlPathHost + "/api/taocongviec/create",
+    //     method: "POST",
+    //     dataType: "json",
+    //     contentType: "application/json",
+    //     data: JSON.stringify(congViecObject),
+    //     success: function () {
+    //         console.log("POST DONE");
+    //         $('#tBody').empty();
+    //         $('#dataTable').dataTable().fnClearTable();
+    //         $('#dataTable').dataTable().fnDestroy();
+    //
+    //     },error: function (e) {
+    //         console.log(e.message);
+    //     },
+    // });
+
+    $.ajax({
+        url: urlPathHost + "/api/taocongviec/create",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(congViecObject),
+        success: function () {
+            console.log("POST DONE");
+            bootbox.alert({
+                message: "Tạo công việc thành công",
+                backdrop: true,
+            });
+        }
+    })
+}
 
 $(document).ready(function () {
     taocongviec.listphongban();

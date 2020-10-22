@@ -20,6 +20,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +36,13 @@ public class ChiTietCongViecController {
         ChiTiet chiTiet = chiTietService.findById(id);
 
         Long idCongViec = chiTiet.getCongViec().getId();
+
         List<ChiTiet> listChiTiet = chiTietService.showCongViec(idCongViec);
         List<String> nhanVienLamViec = chiTietService.nhanVienLamViec(idCongViec);
         ChiTiet nhanVienLamChinh = chiTietService.nhanVienChinh(idCongViec,1L);
+
+
+
         ModelAndView modelAndView = new ModelAndView("/user/ChiTietCongViec");
         modelAndView.addObject("chiTiets",chiTiet);
         modelAndView.addObject("nhanVienLamViec",nhanVienLamViec);
@@ -56,6 +62,7 @@ public class ChiTietCongViecController {
             String filename = uploadfile.getOriginalFilename();
         chiTiets.setFile(filename);
         chiTiets.setBaoCao(baoCao);
+        chiTiets.setNgayBaoCao(java.time.LocalDate.now());
         chiTietService.save(chiTiets);
 //            String directory = request.getServletContext().getRealPath("upload");
 //            System.out.println(directory);

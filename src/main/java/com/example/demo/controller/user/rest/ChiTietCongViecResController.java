@@ -1,10 +1,8 @@
 package com.example.demo.controller.user.rest;
 
-import com.example.demo.model.ChiTiet;
-import com.example.demo.model.NhanVien;
-import com.example.demo.model.PhongBan;
-import com.example.demo.model.ThongBao;
+import com.example.demo.model.*;
 import com.example.demo.model.view.TaoCongViecView;
+import com.example.demo.repository.TinhTrangRepository;
 import com.example.demo.service.ChiTietService;
 import org.hibernate.validator.internal.util.classhierarchy.ClassHierarchyHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,8 @@ import java.util.List;
 public class ChiTietCongViecResController {
     @Autowired
     ChiTietService chiTietService;
+    @Autowired
+    private TinhTrangRepository tinhTrangRepository;
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<ChiTiet>> getView(@PathVariable("id") Long id) {
@@ -35,6 +35,26 @@ public class ChiTietCongViecResController {
             return new ResponseEntity<List<ChiTiet>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<ChiTiet>>(listChiTiet, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/giaHan/{id}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
+    public HttpStatus giaHan(@PathVariable("id")Long id, @RequestBody ChiTiet chiTiet){
+        ChiTiet chiTiets = chiTietService.findById(id);
+        chiTiets.setNgayGiaHan(chiTiet.getNgayGiaHan());
+        CongViec congViec = chiTiets.getCongViec();
+        congViec.setTinhTrang(tinhTrangRepository.findById(4L).orElse(null));
+        chiTietService.save(chiTiets);
+
+        return HttpStatus.OK;
+    }
+    @RequestMapping(value = "/dexuat/{id}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
+    public HttpStatus dexuat(@PathVariable("id")Long id, @RequestBody ChiTiet chiTiet){
+        ChiTiet chiTiets = chiTietService.findById(id);
+        chiTiets.setNgayGiaHan(chiTiet.getNgayGiaHan());
+        CongViec congViec = chiTiets.getCongViec();
+        congViec.setTinhTrang(tinhTrangRepository.findById(4L).orElse(null));
+        chiTietService.save(chiTiets);
+
+        return HttpStatus.OK;
     }
 
 }

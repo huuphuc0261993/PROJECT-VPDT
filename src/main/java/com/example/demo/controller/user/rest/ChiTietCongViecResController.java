@@ -54,5 +54,14 @@ public class ChiTietCongViecResController {
         chiTietService.save(chiTiets);
         return HttpStatus.OK;
     }
+    @RequestMapping(value = "/chuyengiao/{idCongViec}/{idNhanVien}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
+    public HttpStatus chuyengiao(@PathVariable("idCongViec")Long idCongViec,@PathVariable("idNhanVien")int idNhanVien){
+        ChiTiet chiTiets = chiTietService.findById(idCongViec);
+        chiTiets.setThongTinChuyenGiao(idNhanVien);
+        CongViec congViec = chiTiets.getCongViec();
+        congViec.setTinhTrang(tinhTrangRepository.findById(5L).orElse(null));
+        chiTietService.save(chiTiets);
+        return HttpStatus.OK;
+    }
 
 }

@@ -55,15 +55,14 @@ public class ChiTietCongViecController {
     @ResponseBody
     public ResponseEntity<?> uploadFile(HttpServletRequest request, @RequestParam("filename") MultipartFile uploadfile, @PathVariable("id")Long id, @RequestParam("baoCao") String baoCao){
         ChiTiet chiTiets = chiTietService.findById(id);
-        ChiTiet chiTiet = new ChiTiet();
-        try {
-            // Get the filename and build the local file path (be sure that the
-            // application have write permissions on such directory)
-            String filename = uploadfile.getOriginalFilename();
+        String filename = uploadfile.getOriginalFilename();
         chiTiets.setFile(filename);
         chiTiets.setBaoCao(baoCao);
         chiTiets.setNgayBaoCao(java.time.LocalDate.now());
         chiTietService.save(chiTiets);
+        try {
+            // Get the filename and build the local file path (be sure that the
+            // application have write permissions on such directory)
 //            String directory = request.getServletContext().getRealPath("upload");
 //            System.out.println(directory);
 //            String directory = "\\vpdt\\src\\main\\resources\\static\\upload";

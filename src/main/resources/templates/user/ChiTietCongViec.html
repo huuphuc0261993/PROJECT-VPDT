@@ -153,9 +153,47 @@
                         </div>
                         <div class="col-2 btn-custom">
                             <div>
-                                <button type="button" class="btn btn-info mt-5" onclick="chitietcongviec.chuyenGiao()">
+                                <button type="button" class="btn btn-info mt-5" data-toggle="modal"
+                                        data-target="#exampleModal" onclick="chitietcongviec.chuyenGiao()">
                                     Chuyển giao công việc
                                 </button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"
+                                                    th:name="exampleModalLabel">Chuyển giao công việc</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" style="width: 50px">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input hidden name="id" id="id">
+                                                <div class="form-element">
+                                                    <label class="form-element__title">Phòng ban</label>
+                                                    <select class="form-element__input form-element__input--modifier form-control"
+                                                            id="phongBanId"
+                                                            onchange="taocongviec.phongban(this)">
+                                                    </select>
+                                                    <label class="form-element__title">Nhân viên</label>
+                                                    <select class="form-element__input form-element__input--modifier form-control"
+                                                            id="nhanVienId">
+                                                        <option disabled selected>--/--</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 50px">
+                                                    Hủy
+                                                </button>
+                                                <button type="button" onclick="nhanvien.save()" class="btn btn-primary"
+                                                         style="width: 50px">Lưu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <button type="button" class="btn btn-success" onclick="chitietcongviec.deXuatKetThuc()">
@@ -176,6 +214,7 @@
 
 <th:block th:replace="layoutUser::jsAllUser"></th:block>
 <script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
+<script type="text/javascript" th:src="@{/js/taocongviec.js}"></script>
 <script>
     // file
     $(".custom-file-input").on("change", function () {

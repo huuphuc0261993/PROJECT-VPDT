@@ -155,37 +155,34 @@ taocongviec.save = function () {
     congViecObject.ngayKetThuc = ($('#end-day').val());
     congViecObject.tatCaNhanVien = nhanVienLamViec;
     console.log(congViecObject);
-    // $.ajax({
-    //     url: urlPathHost + "/api/taocongviec/create",
-    //     method: "POST",
-    //     dataType: "json",
-    //     contentType: "application/json",
-    //     data: JSON.stringify(congViecObject),
-    //     success: function () {
-    //         console.log("POST DONE");
-    //         $('#tBody').empty();
-    //         $('#dataTable').dataTable().fnClearTable();
-    //         $('#dataTable').dataTable().fnDestroy();
-    //
-    //     },error: function (e) {
-    //         console.log(e.message);
-    //     },
-    // });
-
-    $.ajax({
-        url: urlPathHost + "/api/taocongviec/create",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(congViecObject),
-        success: function () {
-            console.log("POST DONE");
-            bootbox.alert({
-                message: "Tạo công việc thành công",
-                backdrop: true,
-            });
+    bootbox.confirm({
+        title: "Tạo công việc",
+        message: "Bạn có muốn tạo công việc?",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Hủy'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Có',
+                className: 'btn-success'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                $.ajax({
+                    url: urlPathHost + "/api/taocongviec/create",
+                    method: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(congViecObject),
+                    success: function () {
+                        console.log("POST DONE");
+                        location.reload();
+                    }
+                })
+            }
         }
-    })
+    });
 }
 
 $(document).ready(function () {

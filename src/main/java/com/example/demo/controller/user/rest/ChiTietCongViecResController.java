@@ -47,13 +47,11 @@ public class ChiTietCongViecResController {
         return HttpStatus.OK;
     }
     @RequestMapping(value = "/dexuat/{id}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
-    public HttpStatus dexuat(@PathVariable("id")Long id, @RequestBody ChiTiet chiTiet){
+    public HttpStatus dexuat(@PathVariable("id")Long id){
         ChiTiet chiTiets = chiTietService.findById(id);
-        chiTiets.setNgayGiaHan(chiTiet.getNgayGiaHan());
         CongViec congViec = chiTiets.getCongViec();
-        congViec.setTinhTrang(tinhTrangRepository.findById(4L).orElse(null));
+        congViec.setTinhTrang(tinhTrangRepository.findById(6L).orElse(null));
         chiTietService.save(chiTiets);
-
         return HttpStatus.OK;
     }
 

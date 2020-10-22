@@ -22,19 +22,17 @@
                                 <th:block th:each="item:${chiTiets}">
                                     <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
                                     <ol class="breadcrumb mb-4">
-                                        <th:block th:if="${item.checked()}">
-                                            <li class="breadcrumb-item active"
-                                                th:text="'Tình trạng: Quá hạn'"></li>
-<!--                                            <li class="breadcrumb-item active"-->
-<!--                                                th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>-->
-                                        </th:block>
-                                        <th:block th:unless="${item.checked()}">
-                                            <li class="breadcrumb-item active"
-                                                th:text="'Tình trạng: Đang thực hiện'"></li>
-                                            <!--                                            <li class="breadcrumb-item active"-->
-                                            <!--                                                th:text="'Tình trạng: '+ ${item.congViec.tinhTrang.tinhTrang}"></li>-->
-                                        </th:block>
-
+                                        <!--                                        <th:block th:if="${item.checked()}">-->
+                                        <!--                                            <li class="breadcrumb-item active"-->
+                                        <!--                                                th:text="'Tình trạng: Quá hạn'"></li>-->
+                                        <!--                                        </th:block>-->
+                                        <!--                                        <th:block th:unless="${item.checked()}">-->
+                                        <!--                                            <li class="breadcrumb-item active"-->
+                                        <!--                                                th:text="'Tình trạng: Đang thực hiện'"></li>-->
+                                        <!--                                        </th:block>-->
+                                        <li class="breadcrumb-item active"
+                                            th:text="'Tình trạng: '+${item.congViec.tinhTrang.tinhTrang}">
+                                        </li>
                                     </ol>
                                     <div class="card mb-4">
                                         <div class="card-body">
@@ -45,7 +43,8 @@
                                             <p class="mb-0"
                                                th:text="${item.congViec.ngayBatDau}+' đến '+${item.congViec.ngayKetThuc}">
                                             </p>
-                                            <input type="hidden" id="ngayKetThuc" th:value="${item.congViec.ngayKetThuc}">
+                                            <input type="hidden" id="ngayKetThuc"
+                                                   th:value="${item.congViec.ngayKetThuc}">
                                             <th:block th:each="items:${nhanVienChinh}">
                                                 <b>Nhân viên thực hiện chính:</b>
                                                 <p class="mb-0" th:text="${items.nhanVien.fullName}">
@@ -154,10 +153,14 @@
                         </div>
                         <div class="col-2 btn-custom">
                             <div>
-                                <button type="button" class="btn btn-info mt-5" onclick="chitietcongviec.chuyenGiao()">Chuyển giao công việc</button>
+                                <button type="button" class="btn btn-info mt-5" onclick="chitietcongviec.chuyenGiao()">
+                                    Chuyển giao công việc
+                                </button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-success">Đề xuất kết thúc</button>
+                                <button type="button" class="btn btn-success" onclick="chitietcongviec.deXuatKetThuc()">
+                                    Đề xuất kết thúc
+                                </button>
                             </div>
                         </div>
                         <th:block th:each="item:${chiTiets}">
@@ -174,14 +177,14 @@
 <th:block th:replace="layoutUser::jsAllUser"></th:block>
 <script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
 <script>
-    // Add the following code if you want the name of the file appear on select
+    // file
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
     function downLoadFile(url) {
-        var file_path = 'http://localhost:8080/upload/' + url;
+        var file_path = urlPathHost + '/upload/' + url;
         var a = document.createElement('A');
         a.href = file_path;
         a.download = file_path.substr(file_path.lastIndexOf('/') + 1);
@@ -191,5 +194,4 @@
     }
 </script>
 </body>
-
 </html>

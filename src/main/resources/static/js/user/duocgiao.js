@@ -28,6 +28,7 @@ duocgiao.listcongviec = function () {
                             '<td><a href= "/user/chitietcongviec/'+ value.id +'">' + value.congViec.tenCongViec + '</a></td>' +
                         '<td>' + value.congViec.ngayBatDau + '</td>' +
                         '<td>' + value.congViec.ngayKetThuc + '</td>' +
+                        '<td>' + value.congViec.tinhTrang.tinhTrang + '</td>' +
                         '</tr>'
                     );
 

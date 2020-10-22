@@ -101,7 +101,6 @@ chitietcongviec.chuyenGiao = function () {
     //         backdrop: true,
     //     });
     // }
-
 }
 chitietcongviec.deXuatKetThuc = function () {
     var id;
@@ -126,6 +125,7 @@ chitietcongviec.deXuatKetThuc = function () {
                     dataType: "json",
                     success: function () {
                         console.log("POST DONE");
+                        location.reload();
                     }
                 });
             }
@@ -134,5 +134,4 @@ chitietcongviec.deXuatKetThuc = function () {
 }
 $(document).ready(function () {
 
-    // chitietcongviec.showBaoCao();
 });

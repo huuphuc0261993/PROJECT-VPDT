@@ -58,11 +58,11 @@ public class ThongBaoController {
 
     @RequestMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) throws ParseException {
-//        List<CongViec> congViecs = congViecService.tinhTrangCongViec();
-////        for (CongViec i:congViecs) {
-////            i.setTinhTrang(tinhTrangRepository.findById(2L).orElse(null));
-////            congViecService.save(i);
-////        }
+        List<CongViec> congViecs = congViecService.tinhTrangCongViec();
+        for (CongViec i:congViecs) {
+            i.setTinhTrang(tinhTrangRepository.findById(2L).orElse(null));
+            congViecService.save(i);
+        }
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/thongbao/admin";
         }

@@ -15,16 +15,22 @@ quanlycongviec.showTitle = function () {
                 });
                 // index chỉ mục mảng , value giá trị của phần tử mảng
                 $.each(data, function (index, value) {
-                    t.row.add([
-                        value.congViec.tenCongViec,
-                        value.congViec.tinhTrang.tinhTrang,
-                        value.nhanVien.fullName,
-                        "<i class='far fa-edit ' title='Chỉnh sửa thông báo' style='margin-right: 10px' onclick='quanlycongviec.edit(" + value.id + ")'></i>"
-                        ,
-                    ]).draw();
+                    $('#tBody').append(
+                        '<tr>' +
+                        '<td><a href= "/user/chitietcongviec/'+ value.id +'">' + value.congViec.tenCongViec + '</a></td>' +
+                        '<td>' + value.congViec.tinhTrang.tinhTrang + '</td>' +
+                        '<td>' + value.nhanVien.fullName + '</td>' +
+                        '<td><button>' + value.congViec.tenCongViec + '</button></td>' +
+                        '</tr>'
+                    );
+                    // t.row.add([
+                    //
+                    //     value.congViec.tinhTrang.tinhTrang,
+                    //     value.nhanVien.fullName,
+                    //     "<i class='far fa-edit ' title='Chỉnh sửa thông báo' style='margin-right: 10px' onclick='quanlycongviec.edit(" + value.id + ")'></i>"
+                    //     ,
+                    // ]).draw();
                 });
-
-
             },
             error: function (e) {
                 console.log(e.message);

@@ -58,6 +58,8 @@
 <th:block th:replace="layoutUser::jsAllUser"></th:block>
 </body>
 <script>
+    /// lấy tên ảnh trong đường dẫn
+    // $('#my_file')[0].files[0].name
     $("input[type='image']").click(function() {
         $("input[id='my_file']").click();
     });

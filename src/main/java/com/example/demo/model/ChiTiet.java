@@ -25,6 +25,7 @@ public class ChiTiet{
     private LocalDate ngayBaoCao;
     private LocalDate ngayGiaHan;
     private int thongTinChuyenGiao;
+    private int xacNhanThongTin = 0;
 
     @ManyToOne
     @JoinColumn(name = "nhanVien_id")
@@ -188,9 +189,18 @@ public class ChiTiet{
         this.thongTinChuyenGiao = thongTinChuyenGiao;
     }
 
+    public int getXacNhanThongTin() {
+        return xacNhanThongTin;
+    }
+
+    public void setXacNhanThongTin(int xacNhanThongTin) {
+        this.xacNhanThongTin = xacNhanThongTin;
+    }
+
     public boolean checked(){
         LocalDate nowDate = LocalDate.now();
         return Date.valueOf(congViec.getNgayKetThuc().toString()).getTime()<Date.valueOf(nowDate.toString()).getTime();
     }
+
 }
 

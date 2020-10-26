@@ -65,7 +65,7 @@ taocongviec.showNhanVien = function () {
         t.row.add([
             value[1],
             value[2],
-            `<input type='radio' name='iMain' value='${value[0]}'>`,
+            `<input type='radio' name='iMain' value='${value[0]}' checked>`,
             `<span onclick='taocongviec.xoa(${index})'><i class='far fa-trash-alt' ></i></span>`
         ]).draw();
 
@@ -149,10 +149,10 @@ taocongviec.save = function () {
             congViecObject.nvChinh = tmp[index].value;
         }
     });
-    congViecObject.tenCongViec = ($('#title-work').val());
-    congViecObject.noiDung = ($('#message-text').val());
-    congViecObject.ngayBatDau = ($('#start-day').val());
-    congViecObject.ngayKetThuc = ($('#end-day').val());
+    congViecObject.tenCongViec = ($('#title_work').val());
+    congViecObject.noiDung = ($('#message_text').val());
+    congViecObject.ngayBatDau = ($('#start_day').val());
+    congViecObject.ngayKetThuc = ($('#end_day').val());
     congViecObject.tatCaNhanVien = nhanVienLamViec;
     console.log(congViecObject);
     bootbox.confirm({
@@ -188,3 +188,70 @@ taocongviec.save = function () {
 $(document).ready(function () {
     taocongviec.listphongban();
 });
+
+
+var formCreate = $("#myform");
+// jQuery.validator.addMethod(
+//     "xyz",
+//     function () {
+//         if ($('#nhanVienId').val() == null)
+//             return false;
+//         else
+//             return true;
+//     },
+//     "Vui lòng chọn nhân viên"
+// );
+jQuery.validator.addMethod(
+    "phongban",
+    function () {
+        if ($('#phongBanId').val() == null)
+            return false;
+        else
+            return true;
+    },
+    "Vui lòng chọn phòng ban"
+);
+
+
+
+formCreate.validate({
+    rules: {
+        title_work: "required",
+        message_text: "required",
+        phongBanId: {
+            phongban: true
+        }
+    },
+    messages: {
+        title_work: "Vui lòng nhập tên công việc",
+        message_text: "Vui lòng nhập nội dung",
+    },
+    submitHandler: function () {
+        if (validDate()) {
+            taocongviec.save();
+        }
+    }
+});
+
+function validDate() {
+    var startDay = new Date($('#start_day').val()).getTime();
+    var endDay = new Date($('#end_day').val()).getTime();
+    var q = new Date();
+    var m = q.getMonth() + 1;
+    var d = q.getDate();
+    var y = q.getFullYear();
+    if (new Date($('#start_day').val()) == "Invalid Date" || new Date($('#end_day').val()) == "Invalid Date") {
+        console.log(1)
+        alert("Vui lòng chọn ngày tháng")
+        return false;
+    } else if (startDay < new Date(y + "-" + m + "-" + d).getTime()) {
+        console.log(2)
+        alert("Ngày bắt đầu không được nhỏ hơn ngày hiện tại")
+        return false;
+    } else if (startDay > endDay) {
+        console.log(3)
+        alert("Ngày bắt đầu không được lớn hơn ngày kết thúc")
+        return false;
+    }
+    return true;
+}

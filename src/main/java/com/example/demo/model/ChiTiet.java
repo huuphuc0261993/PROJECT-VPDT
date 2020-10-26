@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.web.servlet.View;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

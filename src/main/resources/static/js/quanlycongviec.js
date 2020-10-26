@@ -1,35 +1,75 @@
 
 var quanlycongviec = quanlycongviec || {};
+// quanlycongviec.showTitle = function () {
+//     $.ajax(
+//         {
+//             url: urlPathHost+'/api/quanlycongviec/view',
+//             method: 'GET',
+//             dataType: 'json',
+//             contentType: 'application/json',
+//             success: function (data) {
+//                 $('#tBody').html("");
+//                 // index chỉ mục mảng , value giá trị của phần tử mảng
+//                 $.each(data, function (index, value) {
+//                     console.log(data);
+//                     if (value.congViec.tinhTrang.id==1 || value.congViec.tinhTrang.id == 3 ){
+//                     } else if(value.congViec.tinhTrang.id == 2){
+//                         $('#tBody').append(
+//                             '<tr>' +
+//                             '<td><a href= "/admin/chitietcongviec/'+ value.id +'">' + value.congViec.tenCongViec + '</a></td>' +
+//                             '<td>' + value.congViec.tinhTrang.tinhTrang + '</td>' +
+//                             '<td>' + value.nhanVien.fullName + '</td>' ,
+//                             '</tr>'
+//                         );
+//                     } else {
+//                     $('#tBody').append(
+//                         '<tr>' +
+//                         '<td><a href= "/admin/chitietcongviec/'+ value.id +'">' + value.congViec.tenCongViec + '</a></td>' +
+//                         '<td>' + value.congViec.tinhTrang.tinhTrang + '</td>' +
+//                         '<td>' + value.nhanVien.fullName + '</td>' +
+//                         '<td><button type="submit" class="btn btn-outline-success mr-2">Đồng ý</button>' +
+//                         '<button type="submit" class="btn btn-outline-secondary">Không</button></td>' +
+//                         '</tr>'
+//                     );
+//                     }
+//                 });
+//             },
+//             error: function (e) {
+//                 console.log(e.message);
+//             }
+//         })
+// }
 quanlycongviec.showTitle = function () {
     $.ajax(
         {
-            url: urlPathHost+'/api/quanlycongviec/view',
+            url: urlPathHost + '/api/quanlycongviec/view',
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                console.log('success');
-                console.log(data);
                 let t = $('#dataTable').DataTable({
                     responsive: true
                 });
                 // index chỉ mục mảng , value giá trị của phần tử mảng
                 $.each(data, function (index, value) {
-                    $('#tBody').append(
-                        '<tr>' +
-                        '<td><a href= "/user/chitietcongviec/'+ value.id +'">' + value.congViec.tenCongViec + '</a></td>' +
-                        '<td>' + value.congViec.tinhTrang.tinhTrang + '</td>' +
-                        '<td>' + value.nhanVien.fullName + '</td>' +
-                        '<td><button>' + value.congViec.tenCongViec + '</button></td>' +
-                        '</tr>'
-                    );
-                    // t.row.add([
-                    //
-                    //     value.congViec.tinhTrang.tinhTrang,
-                    //     value.nhanVien.fullName,
-                    //     "<i class='far fa-edit ' title='Chỉnh sửa thông báo' style='margin-right: 10px' onclick='quanlycongviec.edit(" + value.id + ")'></i>"
-                    //     ,
-                    // ]).draw();
+                    if(value.congViec.tinhTrang.id==1 || value.congViec.tinhTrang.id == 3){
+
+                    }else if (value.congViec.tinhTrang.id==2){
+                        t.row.add([
+                            "<a href='/admin/chitietcongviec/"+value.id+"'>"+value.congViec.tenCongViec+"</a>",
+                            value.congViec.tinhTrang.tinhTrang,
+                            value.nhanVien.fullName,
+                            ""
+                        ]).draw();
+                    }else {
+                    t.row.add([
+                        "<a href='/admin/chitietcongviec/"+value.id+"'>"+value.congViec.tenCongViec+"</a>",
+                        value.congViec.tinhTrang.tinhTrang,
+                        value.nhanVien.fullName,
+                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit(" + value.mnv + ")'></i>" +
+                        "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete(" + value.mnv + ")'></i>"
+                    ]).draw();
+                    }
                 });
             },
             error: function (e) {
@@ -37,7 +77,6 @@ quanlycongviec.showTitle = function () {
             }
         })
 }
-
 // quanlycongviec.save = function () {
 //     var quanlycongviecObject = {};
 //     quanlycongviecObject.id = $('#id').val();

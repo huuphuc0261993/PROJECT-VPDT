@@ -10,6 +10,6 @@ import java.util.List;
 
 @Service
 public interface QuanLyCongViecService {
-    Iterable<ChiTiet> findByIsDeletedEquals(int id);
+    List<ChiTiet> chiTietList();
     Iterable<ChiTiet> listQuanLy();
 }

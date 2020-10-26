@@ -17,8 +17,8 @@ public class QuanLyCongViecServiceImpl implements QuanLyCongViecService {
 
 
     @Override
-    public Iterable<ChiTiet> findByIsDeletedEquals(int id) {
-        return quanLyCongViecRepository.findByIsDeletedEquals(id);
+    public List<ChiTiet> chiTietList() {
+        return quanLyCongViecRepository.chiTietList();
     }
 
     @Override

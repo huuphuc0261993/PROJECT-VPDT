@@ -28,7 +28,7 @@ public class QuanLyCongViecResController {
     NhanVienService nhanVienService;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Iterable<ChiTiet>> showView() {
+    public ResponseEntity<List<ChiTiet>> showView() {
         // Lấy Id của nhân viên đang đăng nhập hiện tại
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //        String username = auth.getName();
@@ -37,10 +37,11 @@ public class QuanLyCongViecResController {
 //        request.getSession().setAttribute("userId", nv.getMnv());
 //        Long userId = (Long) request.getSession().getAttribute("userId");
 
-        Iterable<ChiTiet> chiTiets = quanLyCongViecService.listQuanLy();
+        List<ChiTiet> chiTiets = quanLyCongViecService.chiTietList();
         if (chiTiets == null) {
-            return new ResponseEntity<Iterable<ChiTiet>>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<List<ChiTiet>>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<Iterable<ChiTiet>>(chiTiets, HttpStatus.OK);
+        return new ResponseEntity<List<ChiTiet>>(chiTiets, HttpStatus.OK);
     }
+
 }

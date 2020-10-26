@@ -19,5 +19,7 @@ public interface QuanLyCongViecRepository extends PagingAndSortingRepository<Chi
             "where (tinh_trang_id = 5 or tinh_trang_id = 4 or tinh_trang_id = 6) and nv_chinh = 1 and xac_nhan_thong_tin = 0;", nativeQuery = true)
     Iterable<ChiTiet> listQuanLy();
 
-    Iterable<ChiTiet> findByIsDeletedEquals(int id);
+    @Query(value = "select * from chi_tiet where is_deleted=0 and nv_chinh = 1 and xac_nhan_thong_tin = 0;", nativeQuery = true)
+    List<ChiTiet> chiTietList();
+
 }

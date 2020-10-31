@@ -71,13 +71,12 @@ chitietcongviec.giaHan = function () {
 chitietcongviec.chuyenGiao = function () {
     var idCongViec;
     var idNhanVien;
-    idCongViec = $("#idChiTiet").val();
-    idNhanVien = $("#nhanVienId").val();
     var chuyenGiaoObject = {
         thongTinChuyenGiao: ''
     };
-   chuyenGiaoObject.thongTinChuyenGiao = idNhanVien;
-
+    idCongViec = $("#idChiTiet").val();
+    idNhanVien = $("#nhanVienId").val();
+    chuyenGiaoObject.thongTinChuyenGiao = idNhanVien;
         $.ajax({
             url: urlPathHost+"/api/chitietcongviec/chuyengiao/"+idCongViec+"/"+idNhanVien,
             method: "PUT",
@@ -121,7 +120,10 @@ chitietcongviec.deXuatKetThuc = function () {
                     dataType: "json",
                     success: function () {
                         console.log("POST DONE");
-                        location.reload();
+                        bootbox.alert({
+                            message: "Đề xuất kết thúc thành công",
+                            backdrop: true,
+                        });
                     }
                 });
             }

@@ -1,9 +1,11 @@
 package com.example.demo.controller.user;
 
 import com.example.demo.model.ChiTiet;
+import com.example.demo.model.NhanVien;
 import com.example.demo.model.PhongBan;
 import com.example.demo.model.ThongBao;
 import com.example.demo.service.ChiTietService;
+import com.example.demo.service.NhanVienService;
 import com.example.demo.service.ThongBaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -30,6 +32,8 @@ import java.util.List;
 public class ChiTietCongViecController {
     @Autowired
     private ChiTietService chiTietService;
+    @Autowired
+    private NhanVienService nhanVienService;
 
     @GetMapping("/chitietcongviec/{id}")
     public ModelAndView getView(@PathVariable("id")Long id) {
@@ -41,6 +45,8 @@ public class ChiTietCongViecController {
         List<String> nhanVienLamViec = chiTietService.nhanVienLamViec(idCongViec);
         ChiTiet nhanVienLamChinh = chiTietService.nhanVienChinh(idCongViec,1L);
 
+        NhanVien nhanVien = nhanVienService.findById(chiTiet.getThongTinChuyenGiao());
+
 
 
         ModelAndView modelAndView = new ModelAndView("/user/ChiTietCongViec");
@@ -48,6 +54,7 @@ public class ChiTietCongViecController {
         modelAndView.addObject("nhanVienLamViec",nhanVienLamViec);
         modelAndView.addObject("nhanVienChinh",nhanVienLamChinh);
         modelAndView.addObject("listChiTiet",listChiTiet);
+        modelAndView.addObject("nhanVienChuyenGiao",nhanVien);
         return modelAndView;
     }
 

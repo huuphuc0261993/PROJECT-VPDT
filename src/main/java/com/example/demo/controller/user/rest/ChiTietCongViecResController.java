@@ -55,7 +55,7 @@ public class ChiTietCongViecResController {
         return HttpStatus.OK;
     }
     @RequestMapping(value = "/chuyengiao/{idCongViec}/{idNhanVien}", method = RequestMethod.PUT,produces = "application/json;charset=UTF-8")
-    public HttpStatus chuyengiao(@PathVariable("idCongViec")Long idCongViec,@PathVariable("idNhanVien")int idNhanVien){
+    public HttpStatus chuyengiao(@PathVariable("idCongViec")Long idCongViec,@PathVariable("idNhanVien")Long idNhanVien){
         ChiTiet chiTiets = chiTietService.findById(idCongViec);
         chiTiets.setThongTinChuyenGiao(idNhanVien);
         CongViec congViec = chiTiets.getCongViec();

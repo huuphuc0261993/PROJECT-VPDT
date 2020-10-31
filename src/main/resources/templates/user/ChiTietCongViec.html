@@ -22,14 +22,6 @@
                                 <th:block th:each="item:${chiTiets}">
                                     <h1 class="mt-4" th:text="${item.congViec.tenCongViec}"></h1>
                                     <ol class="breadcrumb mb-4">
-                                        <!--                                        <th:block th:if="${item.checked()}">-->
-                                        <!--                                            <li class="breadcrumb-item active"-->
-                                        <!--                                                th:text="'Tình trạng: Quá hạn'"></li>-->
-                                        <!--                                        </th:block>-->
-                                        <!--                                        <th:block th:unless="${item.checked()}">-->
-                                        <!--                                            <li class="breadcrumb-item active"-->
-                                        <!--                                                th:text="'Tình trạng: Đang thực hiện'"></li>-->
-                                        <!--                                        </th:block>-->
                                         <li class="breadcrumb-item active"
                                             th:text="'Tình trạng: '+${item.congViec.tinhTrang.tinhTrang}">
                                         </li>
@@ -55,11 +47,25 @@
                                                 <p class="mb-0" th:utext="${item}">
                                                 </p>
                                             </th:block>
-                                            <div class="form-element">
-                                                <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo cáo:</b></label><br>
 
-                                                <textarea class="form-control"  id="exampleFormControlTextarea1" rows="5"
-                                                          ></textarea>
+                                            <th:block th:if="${item.congViec.tinhTrang.id == 5}">
+                                                <th:block th:each="item:${nhanVienChuyenGiao}">
+                                                    <b>Chuyển giao công việc:</b>
+                                                    <p class="mb-0"
+                                                       th:text="'Nhân viên: '+${item.fullName}">
+                                                    </p>
+                                                    <p class="mb-0"
+                                                        th:text="'Phòng ban: '+${item.phongBan.tenPB}">
+                                                    </p>
+                                                </th:block>
+                                            </th:block>
+
+                                            <div class="form-element">
+                                                <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo
+                                                    cáo:</b></label><br>
+
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                                ></textarea>
                                             </div>
                                             <div style="height: 2vh;"></div>
                                             <div class="modal-footer-btn">
@@ -75,7 +81,7 @@
                                                                 >Gửi
                                                                 </button>
                                                             </div>
-                                                                <div class="col-9 custom-file mb-3">
+                                                            <div class="col-9 custom-file mb-3">
                                                                 <input type="file" class="custom-file-input filename"
                                                                        id="customFile"
                                                                        name="filename">
@@ -183,11 +189,14 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 50px">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                        style="width: 50px">
                                                     Hủy
                                                 </button>
-                                                <button type="button" onclick="chitietcongviec.chuyenGiao()" class="btn btn-primary"
-                                                         style="width: 50px">Lưu</button>
+                                                <button type="button" onclick="chitietcongviec.chuyenGiao()"
+                                                        class="btn btn-primary"
+                                                        style="width: 50px">Lưu
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

@@ -14,6 +14,7 @@ public interface NhanVienService {
     NhanVien findByUsername(String username);
     void save(NhanVien nhanVien);
     List<NhanVien> listNhanVien(@Param("mpb")Long mpb);
+    List<NhanVien> listNhanVienUser(@Param("mpb")Long mpb, @Param("mnv")Long mnv);
     NhanVien findById(Long id);
 
 

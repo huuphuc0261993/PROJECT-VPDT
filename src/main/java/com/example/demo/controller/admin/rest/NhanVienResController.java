@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,31 @@ public class NhanVienResController {
         }
         return new ResponseEntity<List<NhanVien>>(nhanVienList, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/viewuser/{id}",method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public ResponseEntity<List<NhanVien>> showView(@PathVariable("id")Long id, HttpServletRequest request){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println(username);
+        NhanVien nvs = nhanVienService.findByUsername(username);
+        request.getSession().setAttribute("userId", nvs.getMnv());
+        Long userId = (Long) request.getSession().getAttribute("userId");
+
+
+        List<NhanVien>nhanViens=nhanVienService.listNhanVienUser(id,userId);
+        List<NhanVien> nhanVienList = new ArrayList<>();
+        for (NhanVien nv:nhanViens) {
+            NhanVien nhanVien = new NhanVien();
+            nhanVien.setFullName(nv.getFullName());
+            nhanVien.setPhongBan(nv.getPhongBan());
+            nhanVien.setMnv(nv.getMnv());
+            nhanVienList.add(nhanVien);
+        }
+        return new ResponseEntity<List<NhanVien>>(nhanVienList, HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "/view", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public ResponseEntity<Iterable<NhanVien>> showView() {
         Iterable<NhanVien> nhanViens = nhanVienService.findAllByIsDeletedEquals(0);

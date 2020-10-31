@@ -52,13 +52,13 @@ quanlycongviec.showTitle = function () {
                 });
                 // index chỉ mục mảng , value giá trị của phần tử mảng
                 $.each(data, function (index, value) {
-                    if(value.congViec.tinhTrang.id==1 || value.congViec.tinhTrang.id == 3){
-
-                    }else if (value.congViec.tinhTrang.id==2){
+                    if(value.congViec.tinhTrang.id == 3){
                         t.row.add([
                             "<a href='/admin/chitietcongviec/"+value.id+"'>"+value.congViec.tenCongViec+"</a>",
                             value.congViec.tinhTrang.tinhTrang,
                             value.nhanVien.fullName,
+                            value.nhanVien.phongBan.tenPB,
+                            value.congViec.ngayKetThuc,
                             ""
                         ]).draw();
                     }else {
@@ -66,8 +66,9 @@ quanlycongviec.showTitle = function () {
                         "<a href='/admin/chitietcongviec/"+value.id+"'>"+value.congViec.tenCongViec+"</a>",
                         value.congViec.tinhTrang.tinhTrang,
                         value.nhanVien.fullName,
-                        "<i class='far fa-edit ' title='Chỉnh sửa' style='margin-right: 10px' onclick='nhanvien.edit(" + value.mnv + ")'></i>" +
-                        "<i class='far fa-trash-alt ' title='Xóa' style='margin-right: 10px' onclick='nhanvien.delete(" + value.mnv + ")'></i>"
+                        value.nhanVien.phongBan.tenPB,
+                        value.congViec.ngayKetThuc,
+                        "<i class='fas fa-check ' title='Chỉnh sửa' style='margin-right: 10px' onclick='quanlycongviec.dongy(" +value.id+","+value.congViec.tinhTrang.id + ")'></i>"
                     ]).draw();
                     }
                 });
@@ -76,6 +77,97 @@ quanlycongviec.showTitle = function () {
                 console.log(e.message);
             }
         })
+}
+quanlycongviec.dongy = function (idChiTiet,idTinhTrang){
+    console.log(idTinhTrang)
+    if(idTinhTrang == 6){
+        bootbox.confirm({
+            title: "Kết thúc công việc",
+            message: "Bạn có muốn kết thúc công việc không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Hủy'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Đồng ý',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: urlPathHost+"/api/quanlycongviec/ketthuc/" + idChiTiet,
+                        method: "PUT",
+                        dataType: "json",
+                        success: function (data) {
+                            $('#tBody').empty();
+                            $('#dataTable').dataTable().fnClearTable();
+                            $('#dataTable').dataTable().fnDestroy();
+                            quanlycongviec.showTitle();
+                        }
+                    });
+                }
+            }
+        });
+    } else if(idTinhTrang == 4){
+        bootbox.confirm({
+            title: "Gia hạn cộng việc",
+            message: "Bạn có muốn gia hạn công việc không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Hủy'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Đồng ý',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: urlPathHost+"/api/quanlycongviec/giahan/" + idChiTiet,
+                        method: "PUT",
+                        dataType: "json",
+                        success: function (data) {
+                            $('#tBody').empty();
+                            $('#dataTable').dataTable().fnClearTable();
+                            $('#dataTable').dataTable().fnDestroy();
+                            quanlycongviec.showTitle();
+                        }
+                    });
+                }
+            }
+        });
+    }else if (idTinhTrang == 5){
+        bootbox.confirm({
+            title: "Chuyển giao cộng việc",
+            message: "Bạn có muốn chuyển giao công việc không?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Hủy'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Đồng ý',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: urlPathHost+"/api/quanlycongviec/giahan/" + idChiTiet,
+                        method: "PUT",
+                        dataType: "json",
+                        success: function (data) {
+                            $('#tBody').empty();
+                            $('#dataTable').dataTable().fnClearTable();
+                            $('#dataTable').dataTable().fnDestroy();
+                            quanlycongviec.showTitle();
+                        }
+                    });
+                }
+            }
+        });
+    }
 }
 // quanlycongviec.save = function () {
 //     var quanlycongviecObject = {};

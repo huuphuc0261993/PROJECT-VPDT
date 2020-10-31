@@ -33,6 +33,11 @@ public class NhanvienServiceImpl implements NhanVienService {
         return nhanVienRepository.listNhanVien(mpb);
     }
 
+    @Override
+    public List<NhanVien> listNhanVienUser(Long mpb, Long mnv) {
+        return nhanVienRepository.listNhanVienUser(mpb,mnv);
+    }
+
 
     @Override
     public NhanVien findById(Long id) {

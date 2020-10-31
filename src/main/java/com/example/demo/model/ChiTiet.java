@@ -23,8 +23,8 @@ public class ChiTiet{
     private String baoCao;
     private String file;
     private LocalDate ngayBaoCao;
-    private LocalDate ngayGiaHan;
-    private int thongTinChuyenGiao;
+    private Date ngayGiaHan;
+    private Long thongTinChuyenGiao;
     private int xacNhanThongTin = 0;
 
     @ManyToOne
@@ -173,19 +173,19 @@ public class ChiTiet{
         this.ngayBaoCao = ngayBaoCao;
     }
 
-    public LocalDate getNgayGiaHan() {
+    public Date getNgayGiaHan() {
         return ngayGiaHan;
     }
 
-    public void setNgayGiaHan(LocalDate ngayGiaHan) {
+    public void setNgayGiaHan(Date ngayGiaHan) {
         this.ngayGiaHan = ngayGiaHan;
     }
 
-    public int getThongTinChuyenGiao() {
+    public Long getThongTinChuyenGiao() {
         return thongTinChuyenGiao;
     }
 
-    public void setThongTinChuyenGiao(int thongTinChuyenGiao) {
+    public void setThongTinChuyenGiao(Long thongTinChuyenGiao) {
         this.thongTinChuyenGiao = thongTinChuyenGiao;
     }
 

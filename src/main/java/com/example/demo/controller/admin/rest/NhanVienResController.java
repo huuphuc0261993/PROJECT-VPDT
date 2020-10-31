@@ -54,6 +54,7 @@ public class NhanVienResController {
 
 
         List<NhanVien>nhanViens=nhanVienService.listNhanVienUser(id,userId);
+
         List<NhanVien> nhanVienList = new ArrayList<>();
         for (NhanVien nv:nhanViens) {
             NhanVien nhanVien = new NhanVien();

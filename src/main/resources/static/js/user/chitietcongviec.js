@@ -135,7 +135,7 @@ chitietcongviec.phongban = function (element) {
     console.log(idPhongBan);
     $.ajax(
         {
-            url: urlPathHost + '/api/nhanvien/view/' + idPhongBan,
+            url: urlPathHost + '/api/nhanvien/viewuser/' + idPhongBan,
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
@@ -145,11 +145,12 @@ chitietcongviec.phongban = function (element) {
                 // nhanVienList = data;
                 // index chỉ mục mảng , value giá trị của phần tử mảng
                 $.each(data, function (index, value) {
-                    if (nhanVienLamViec.indexOf(value.mnv) == -1) {
-                        $('#nhanVienId').append(
-                            "<option value='" + value.mnv + "'>" + value.fullName + "</option>"
-                        );
-                    }
+                    console.log(data);
+                    // if (nhanVienLamViec.indexOf(value.mnv) == -1) {
+                    //     $('#nhanVienId').append(
+                    //         "<option value='" + value.mnv + "'>" + value.fullName + "</option>"
+                    //     );
+                    // }
 
                 });
             },

@@ -64,6 +64,8 @@ public class QuanLyCongViecResController {
         ChiTiet chiTiet = chiTietService.findById(idChiTiet);
         chiTiet.getCongViec().setNgayKetThuc(chiTiet.getNgayGiaHan());
         chiTiet.setXacNhanThongTin(1);
+        chiTiet.getCongViec().setNgayKetThuc(chiTiet.getNgayGiaHan());
+        chiTiet.getCongViec().setTinhTrang(tinhTrangService.findById(1L));
         chiTietService.save(chiTiet);
         return HttpStatus.OK;
     }

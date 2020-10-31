@@ -60,7 +60,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(false)
+                .deleteCookies("JSESSIONID")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
         http.csrf().disable();
     }
 }

@@ -86,14 +86,13 @@ chitietcongviec.chuyenGiao = function () {
             success: function () {
                 console.log("POST DONE");
                 $('#exampleModal').modal('hide');
-
-                    // bootbox.alert({
-                    //     title: "Chuyển giao",
-                    //     message: "Yêu cầu của bạn đang chờ xét duyệt!",
-                    //     backdrop: true,
-                    // });
-
-
+                setTimeout(function(){
+                    bootbox.alert({
+                        title: "Chuyển giao",
+                        message: "Yêu cầu của bạn đang chờ xét duyệt!",
+                        backdrop: true,
+                    });
+                }, 200);
             },
         });
 }

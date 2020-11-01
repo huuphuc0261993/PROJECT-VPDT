@@ -24,7 +24,7 @@ public class ChiTiet{
     private String file;
     private LocalDate ngayBaoCao;
     private Date ngayGiaHan;
-    private Long thongTinChuyenGiao;
+    private Long thongTinChuyenGiao = 0L;
     private int xacNhanThongTin = 0;
 
     @ManyToOne

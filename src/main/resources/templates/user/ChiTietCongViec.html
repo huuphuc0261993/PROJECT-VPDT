@@ -59,6 +59,12 @@
                                                     </p>
                                                 </th:block>
                                             </th:block>
+                                            <th:block th:if="${item.ngayGiaHan != null && item.congViec.tinhTrang.id == 4}">
+                                                    <b>Gia hạn công việc:</b>
+                                                    <p class="mb-0"
+                                                       th:text="'Ngày gia hạn: '+${item.ngayGiaHan}">
+                                                    </p>
+                                            </th:block>
 
                                             <div class="form-element">
                                                 <label class="form-element__title" for="exampleFormControlTextarea1"><b>Báo
@@ -156,7 +162,7 @@
                         <div class="col-2 btn-custom">
                             <div>
                                 <button type="button" class="btn btn-info mt-5" data-toggle="modal"
-                                        data-target="#exampleModal" onclick="chitietcongviec.chuyenGiao()">
+                                        data-target="#exampleModal" >
                                     Chuyển giao công việc
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"

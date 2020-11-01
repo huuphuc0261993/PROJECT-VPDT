@@ -67,6 +67,12 @@
                                                     </p>
                                                 </th:block>
                                             </th:block>
+                                            <th:block th:if="${item.ngayGiaHan != null && item.congViec.tinhTrang.id == 4}">
+                                                <b>Gia hạn công việc:</b>
+                                                <p class="mb-0"
+                                                   th:text="'Ngày gia hạn: '+${item.ngayGiaHan}">
+                                                </p>
+                                            </th:block>
                                             <div style="height: 2vh;"></div>
                                         </div>
                                     </div>

@@ -22,4 +22,9 @@ public interface QuanLyCongViecRepository extends PagingAndSortingRepository<Chi
     @Query(value = "select * from chi_tiet where is_deleted=0 and nv_chinh = 1 and xac_nhan_thong_tin = 0;", nativeQuery = true)
     List<ChiTiet> chiTietList();
 
+
+    @Query(value = "select id from chi_tiet where nhan_vien_id = :nhan_vien_id and cong_viec_id = :cong_viec_id;", nativeQuery = true)
+    Long chuyenGiao(@Param("nhan_vien_id")Long nhan_vien_id, @Param("cong_viec_id")Long cong_viec_id);
+
+
 }

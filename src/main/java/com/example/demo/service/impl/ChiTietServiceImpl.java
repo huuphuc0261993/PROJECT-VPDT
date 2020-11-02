@@ -42,6 +42,11 @@ public class ChiTietServiceImpl implements ChiTietService {
         return chiTietRepository.showCongViec(cong_viec_id);
     }
 
+    @Override
+    public Long count(Long tinh_trang_id, Long nhan_vien_id) {
+        return chiTietRepository.count(tinh_trang_id,nhan_vien_id);
+    }
+
 //    @Override
 //    public void create(int nv_chinh, int cong_viec_id, int nhan_vien_id) {
 //        chiTietRepository.create(nv_chinh,cong_viec_id,nhan_vien_id);

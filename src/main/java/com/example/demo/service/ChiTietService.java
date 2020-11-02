@@ -14,6 +14,7 @@ public interface ChiTietService {
     List<String> nhanVienLamViec(@Param("cong_viec_id")Long cong_viec_id);
     ChiTiet nhanVienChinh(@Param("cong_viec_id")Long cong_viec_id,@Param("nv_chinh")Long nv_chinh);
     List<ChiTiet> showCongViec(@Param("cong_viec_id")Long cong_viec_id);
+    Long count(@Param("tinh_trang_id")Long tinh_trang_id,@Param("nhan_vien_id")Long nhan_vien_id);
 
 //    void create(@Param("nv_chinh")int nv_chinh, @Param("cong_viec_id")int cong_viec_id, @Param("nhan_vien_id")int nhan_vien_id);
 }

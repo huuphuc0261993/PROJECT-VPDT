@@ -27,4 +27,9 @@ public interface ChiTietRepository extends PagingAndSortingRepository<ChiTiet, L
     ChiTiet nhanVienChinh(@Param("cong_viec_id")Long cong_viec_id,@Param("nv_chinh")Long nv_chinh);
     @Query(value = "select*from chi_tiet where cong_viec_id = :cong_viec_id and is_deleted = 0", nativeQuery = true)
     List<ChiTiet> showCongViec(@Param("cong_viec_id")Long cong_viec_id);
+
+    @Query(value = "SELECT COUNT(tinh_trang_id) AS tinhtrang FROM chi_tiet " +
+            "inner join cong_viecs on chi_tiet.cong_viec_id = cong_viecs.id " +
+            "where tinh_trang_id = :tinh_trang_id and nhan_vien_id = :nhan_vien_id;", nativeQuery = true)
+    Long count(@Param("tinh_trang_id")Long tinh_trang_id,@Param("nhan_vien_id")Long nhan_vien_id);
 }

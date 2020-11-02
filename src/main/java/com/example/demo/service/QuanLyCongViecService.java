@@ -12,5 +12,4 @@ import java.util.List;
 public interface QuanLyCongViecService {
     List<ChiTiet> chiTietList();
     Iterable<ChiTiet> listQuanLy();
-    Long chuyenGiao(@Param("nhan_vien_id")Long nhan_vien_id, @Param("cong_viec_id")Long cong_viec_id);
 }

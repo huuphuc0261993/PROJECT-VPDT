@@ -154,7 +154,7 @@ quanlycongviec.dongy = function (idChiTiet,idTinhTrang){
             callback: function (result) {
                 if (result) {
                     $.ajax({
-                        url: urlPathHost+"/api/quanlycongviec/chuyengiao/" + idChiTiet,
+                        url: urlPathHost+"/api/quanlycongviec/giahan/" + idChiTiet,
                         method: "PUT",
                         dataType: "json",
                         success: function (data) {

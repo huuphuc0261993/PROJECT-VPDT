@@ -10260,3 +10260,9 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+/*====================================================================================*/
+.error {
+  color: red;
+  padding: 3px;
+}

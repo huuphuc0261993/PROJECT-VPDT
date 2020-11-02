@@ -18,11 +18,9 @@ var ctx = document.getElementById("myPieChart");
 // });
 
 chart.drawChart = function () {
-    let idPhongBan = $(element).val();
-    console.log(idPhongBan);
     $.ajax(
         {
-            url: urlPathHost + '/api/chart',
+            url: urlPathHost + '/api/chart/view',
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
@@ -33,7 +31,7 @@ chart.drawChart = function () {
                     data: {
                         labels: ["Đang thực hiện", "Đúng hạn", "Quá hạn"],
                         datasets: [{
-                            data: [12.21, 15.58, 11.25],
+                            data: data,
                             backgroundColor: ['#007bff', '#28a745', '#dc3545'],
                         }],
                     },
@@ -44,3 +42,6 @@ chart.drawChart = function () {
             }
         });
 }
+$(document).ready(function () {
+    chart.drawChart();
+});

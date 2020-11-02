@@ -16,8 +16,12 @@
             <main>
                 <form id="myform">
 
-                    <button type="button" class="btn btn-dark pr-5 pl-5 ml-3 mt-3 mb-3" data-toggle="modal" data-target="#exampleModal" style="border-radius: 0" onclick="nhanvien.addNew()">Thêm Nhân Viên</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <button type="button" class="btn btn-dark pr-5 pl-5 ml-3 mt-3 mb-3" data-toggle="modal"
+                            data-target="#exampleModal" style="border-radius: 0" onclick="nhanvien.addNew()">Thêm Nhân
+                        Viên
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -27,27 +31,36 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <input hidden name="id" id="id" >
+                                    <input hidden name="id" id="id">
                                     <div class="form-group">
-                                        <label  class="col-form-label">Username</label>
-                                        <input id="username" type="text" class="form-control">
-                                        <label  class="col-form-label">Password</label>
-                                        <input id="password" type="password" class="form-control">
-                                        <label  class="col-form-label">Họ và tên</label>
-                                        <input id="fullName" type="text" class="form-control">
+                                        <label class="col-form-label">Username</label>
+                                        <input id="username" name="username" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Password</label>
+                                        <input id="password" name="password" type="password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Họ và tên</label>
+                                        <input id="fullName" name="fullName" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-element__title">Phòng ban</label>
-                                        <select class="form-control" id="department">
-
+                                        <select class="form-control" id="department" name="department">
                                         </select>
-                                        <label  class="col-form-label">Email</label>
-                                        <input id="email" type="email" class="form-control">
-                                        <label  class="col-form-label">Phone</label>
-                                        <input id="phone" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Email</label>
+                                        <input id="email" name="email" type="email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Phone</label>
+                                        <input id="phone" name="phone" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                    <button type="button" onclick="nhanvien.save()" class="btn btn-primary" id="modal-form-1"></button>
+                                    <button type="submit" class="btn btn-primary" id="modal-form-1"></button>
                                 </div>
                             </div>
                         </div>

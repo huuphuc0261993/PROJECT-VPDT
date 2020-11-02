@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,27 +35,11 @@ public class ChartController {
     @Autowired
     TinhTrangService tinhTrangService;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<HashMap<Integer, String>> showView(HttpServletRequest request) {
-        // Lấy Id của nhân viên đang đăng nhập hiện tại
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        System.out.println(username);
-        NhanVien nv = nhanVienService.findByUsername(username);
-        request.getSession().setAttribute("userId", nv.getMnv());
-        Long userId = (Long) request.getSession().getAttribute("userId");
 
+@GetMapping("/view")
+public ModelAndView getView() {
+    ModelAndView modelAndView = new ModelAndView("user/Chart");
+    return modelAndView;
 
-        HashMap<Integer, String> thongke = new HashMap<Integer, String>();
-        Long tinhTrang = tinhTrangService.findById(1L);
-        // dang thuc hien
-        chiTietService.count(tinhTrang,userId);
-        // qua han
-        // dung han
-
-
-
-
-        return new ResponseEntity<HashMap<Integer, String>>(chiTiets, HttpStatus.OK);
-    }
+}
 }

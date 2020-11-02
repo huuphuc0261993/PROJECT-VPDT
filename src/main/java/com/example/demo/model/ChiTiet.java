@@ -201,7 +201,5 @@ public class ChiTiet{
     public void setXacNhanThongTin(int xacNhanThongTin) {
         this.xacNhanThongTin = xacNhanThongTin;
     }
-
-
 }
 

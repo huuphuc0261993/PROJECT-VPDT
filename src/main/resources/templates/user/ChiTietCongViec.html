@@ -55,15 +55,9 @@
                                                        th:text="'Nhân viên: '+${item.fullName}">
                                                     </p>
                                                     <p class="mb-0"
-                                                       th:text="'Phòng ban: '+${item.phongBan.tenPB}">
+                                                        th:text="'Phòng ban: '+${item.phongBan.tenPB}">
                                                     </p>
                                                 </th:block>
-                                            </th:block>
-                                            <th:block th:if="${item.ngayGiaHan != null && item.congViec.tinhTrang.id == 4}">
-                                                    <b>Gia hạn công việc:</b>
-                                                    <p class="mb-0"
-                                                       th:text="'Ngày gia hạn: '+${item.ngayGiaHan}">
-                                                    </p>
                                             </th:block>
 
                                             <div class="form-element">
@@ -95,6 +89,8 @@
                                                                     file</label>
                                                             </div>
                                                         </div>
+
+
                                                     </div>
                                                     <div class="col-7" style="text-align: right">
                                                         <button type="button" class="btn btn-primary btn-action"
@@ -162,7 +158,7 @@
                         <div class="col-2 btn-custom">
                             <div>
                                 <button type="button" class="btn btn-info mt-5" data-toggle="modal"
-                                        data-target="#exampleModal" >
+                                        data-target="#exampleModal" onclick="chitietcongviec.chuyenGiao()">
                                     Chuyển giao công việc
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -225,7 +221,7 @@
 
 <th:block th:replace="layoutUser::jsAllUser"></th:block>
 <script type="text/javascript" th:src="@{/js/user/chitietcongviec.js}"></script>
-<script type="text/javascript" th:src="@{/js/user/chitietUser.js}"></script>
+<script type="text/javascript" th:src="@{/js/taocongviec.js}"></script>
 <script>
     // file
     $(".custom-file-input").on("change", function () {

@@ -37,7 +37,7 @@ thongbao.save = function () {
     console.log(thongbaoObject.id);
     if ($("id").val() == null) {
         thongbaoObject.tieuDe = $('#tieuDe').val();
-        thongbaoObject.noiDung = $('#message-text').val();
+        thongbaoObject.noiDung = $('#message_text').val();
         console.log(thongbao);
         $.ajax({
             url: urlPathHost+"/api/thongbao/create",
@@ -83,8 +83,10 @@ thongbao.edit = function (id) {
             $('#modal-form-1').html("Sửa");
             $('#id').val(data.id);
             $('#tieuDe').val(data.tieuDe);
-            $('#message-text').val(data.noiDung);
+            $('#message_text').val(data.noiDung);
             $('#exampleModal').modal('show');
+            formNotificationValid.resetForm();
+            $(".error").removeClass("error");
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);
 
@@ -126,15 +128,31 @@ thongbao.addNew = function () {
     thongbao.resetForm();
     $('#modal-form-1').html("Tạo");
     $('#exampleModal').modal('show');
+    formNotificationValid.resetForm();
 };
 
 thongbao.resetForm = function () {
     $('#myform')[0].reset();
     $('#tieuDe').val('');
-    $('#message-text').val('');
+    $('#message_text').val('');
     //
 }
 
 $(document).ready(function () {
     thongbao.showTitle();
+});
+
+var formNotification = $("#myform");
+var formNotificationValid = formNotification.validate({
+    rules: {
+        tieuDe: "required",
+        message_text: "required"
+    },
+    messages: {
+        tieuDe: "Vui lòng nhập tiêu đề",
+        message_text: "Vui lòng nhập nội dung",
+    },
+    submitHandler: function () {
+        thongbao.save();
+    }
 });

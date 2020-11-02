@@ -26,10 +26,5 @@ public class QuanLyCongViecServiceImpl implements QuanLyCongViecService {
         return quanLyCongViecRepository.listQuanLy();
     }
 
-    @Override
-    public Long chuyenGiao(Long nhan_vien_id, Long cong_viec_id) {
-        return quanLyCongViecRepository.chuyenGiao(nhan_vien_id,cong_viec_id);
-    }
-
 
 }

@@ -77,24 +77,25 @@ chitietcongviec.chuyenGiao = function () {
     idCongViec = $("#idChiTiet").val();
     idNhanVien = $("#nhanVienId").val();
     chuyenGiaoObject.thongTinChuyenGiao = idNhanVien;
-    $.ajax({
-        url: urlPathHost + "/api/chitietcongviec/chuyengiao/" + idCongViec + "/" + idNhanVien,
-        method: "PUT",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(chuyenGiaoObject),
-        success: function () {
-            console.log("POST DONE");
-            $('#exampleModal').modal('hide');
-            setTimeout(function () {
-                bootbox.alert({
-                    title: "Chuyển giao",
-                    message: "Yêu cầu của bạn đang chờ xét duyệt!",
-                    backdrop: true,
-                });
-            }, 200);
-        },
-    });
+        $.ajax({
+            url: urlPathHost+"/api/chitietcongviec/chuyengiao/"+idCongViec+"/"+idNhanVien,
+            method: "PUT",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(chuyenGiaoObject),
+            success: function () {
+                console.log("POST DONE");
+                $('#exampleModal').modal('hide');
+
+                    // bootbox.alert({
+                    //     title: "Chuyển giao",
+                    //     message: "Yêu cầu của bạn đang chờ xét duyệt!",
+                    //     backdrop: true,
+                    // });
+
+
+            },
+        });
 }
 chitietcongviec.deXuatKetThuc = function () {
     var id;
@@ -134,7 +135,7 @@ chitietcongviec.phongban = function (element) {
     console.log(idPhongBan);
     $.ajax(
         {
-            url: urlPathHost + '/api/nhanvien/viewuser/' + idPhongBan,
+            url: urlPathHost + '/api/nhanvien/view/' + idPhongBan,
             method: 'GET',
             dataType: 'json',
             contentType: 'application/json',
@@ -144,12 +145,11 @@ chitietcongviec.phongban = function (element) {
                 // nhanVienList = data;
                 // index chỉ mục mảng , value giá trị của phần tử mảng
                 $.each(data, function (index, value) {
-                    console.log(data);
-                    // if (nhanVienLamViec.indexOf(value.mnv) == -1) {
-                    //     $('#nhanVienId').append(
-                    //         "<option value='" + value.mnv + "'>" + value.fullName + "</option>"
-                    //     );
-                    // }
+                    if (nhanVienLamViec.indexOf(value.mnv) == -1) {
+                        $('#nhanVienId').append(
+                            "<option value='" + value.mnv + "'>" + value.fullName + "</option>"
+                        );
+                    }
 
                 });
             },

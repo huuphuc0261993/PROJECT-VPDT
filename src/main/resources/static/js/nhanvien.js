@@ -126,6 +126,8 @@ nhanvien.edit = function (mnv) {
             // console.log(data.phongBan.tenPB);
             $('#phone').val(data.phone);
             $('#exampleModal').modal('show');
+            formUserValid.resetForm();
+            $(".error").removeClass("error");
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);
 
@@ -176,8 +178,48 @@ nhanvien.addNew = function () {
     nhanvien.resetForm();
     $('#modal-form-1').html("Tạo");
     $('#exampleModal').modal('show');
+    formUserValid.resetForm();
 };
 $(document).ready(function () {
     nhanvien.showTitle();
     nhanvien.listphongban();
+});
+
+var formUser = $("#myform");
+jQuery.validator.addMethod('phone_valid', function (value) {
+    var regex = /((09|03|07|08|05)+([0-9]{8,9})\b)/g;
+    return value.trim().match(regex);
+});
+var formUserValid = formUser.validate({
+    rules: {
+        username: "required",
+        password: "required",
+        fullName: "required",
+        department: "required",
+        email: {
+            required: true,
+            email: true
+        },
+        phone: {
+            required: true,
+            phone_valid: true
+        }
+    },
+    messages: {
+        username: "Vui lòng nhập username",
+        password: "Vui lòng nhập password",
+        fullName: "Vui lòng nhập họ và tên",
+        department: "Vui lòng nhập phòng ban",
+        email: {
+            required: "Vui lòng nhập email",
+            email: "Vui lòng nhập dúng định dạng email",
+        },
+        phone: {
+            required: "Vui lòng nhập số điện thoại",
+            phone_valid: "Vui lòng nhập đúng định dạng số điện thoại"
+        }
+    },
+    submitHandler: function () {
+        nhanvien.save();
+    }
 });

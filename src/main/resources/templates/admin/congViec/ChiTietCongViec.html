@@ -55,24 +55,6 @@
                                                 <p class="mb-0" th:utext="${item}">
                                                 </p>
                                             </th:block>
-
-                                            <th:block th:if="${item.congViec.tinhTrang.id == 5}">
-                                                <th:block th:each="item:${nhanVienChuyenGiao}">
-                                                    <b>Chuyển giao công việc:</b>
-                                                    <p class="mb-0"
-                                                       th:text="'Nhân viên: '+${item.fullName}">
-                                                    </p>
-                                                    <p class="mb-0"
-                                                       th:text="'Phòng ban: '+${item.phongBan.tenPB}">
-                                                    </p>
-                                                </th:block>
-                                            </th:block>
-                                            <th:block th:if="${item.ngayGiaHan != null && item.congViec.tinhTrang.id == 4}">
-                                                <b>Gia hạn công việc:</b>
-                                                <p class="mb-0"
-                                                   th:text="'Ngày gia hạn: '+${item.ngayGiaHan}">
-                                                </p>
-                                            </th:block>
                                             <div style="height: 2vh;"></div>
                                         </div>
                                     </div>

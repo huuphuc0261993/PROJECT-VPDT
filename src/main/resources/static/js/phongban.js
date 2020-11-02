@@ -79,6 +79,8 @@ phongban.edit = function(mpb){
             $('#id').val(data.mpb);
             $('#tenPB').val(data.tenPB);
             $('#exampleModal').modal('show');
+            formDepartmentValid.resetForm();
+            $(".error").removeClass("error");
             // $('#productLine').val(data.productLine.id);
             // $('#id').val(data.id);
 
@@ -95,7 +97,21 @@ phongban.edit = function(mpb){
         phongban.resetForm();
         $('#modal-form-1').html("Tạo");
         $('#exampleModal').modal('show');
+        formDepartmentValid.resetForm();
     };
     $(document).ready(function () {
         phongban.showTitle();
     });
+
+var formDepartment = $("#myform");
+var formDepartmentValid = formDepartment.validate({
+    rules: {
+        tenPB: "required"
+    },
+    messages: {
+        tenPB: "Vui lòng nhập phòng ban"
+    },
+    submitHandler: function () {
+        phongban.save();
+    }
+});

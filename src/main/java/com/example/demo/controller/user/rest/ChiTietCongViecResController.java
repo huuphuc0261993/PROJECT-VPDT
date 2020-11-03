@@ -42,6 +42,7 @@ public class ChiTietCongViecResController {
         chiTiets.setNgayGiaHan(chiTiet.getNgayGiaHan());
         CongViec congViec = chiTiets.getCongViec();
         congViec.setTinhTrang(tinhTrangRepository.findById(4L).orElse(null));
+        chiTiets.setXacNhanThongTin(0);
         chiTietService.save(chiTiets);
 
         return HttpStatus.OK;
@@ -51,6 +52,7 @@ public class ChiTietCongViecResController {
         ChiTiet chiTiets = chiTietService.findById(id);
         CongViec congViec = chiTiets.getCongViec();
         congViec.setTinhTrang(tinhTrangRepository.findById(6L).orElse(null));
+        chiTiets.setXacNhanThongTin(0);
         chiTietService.save(chiTiets);
         return HttpStatus.OK;
     }
@@ -60,6 +62,7 @@ public class ChiTietCongViecResController {
         chiTiets.setThongTinChuyenGiao(idNhanVien);
         CongViec congViec = chiTiets.getCongViec();
         congViec.setTinhTrang(tinhTrangRepository.findById(5L).orElse(null));
+        chiTiets.setXacNhanThongTin(0);
         chiTietService.save(chiTiets);
         return HttpStatus.OK;
     }

@@ -21,6 +21,7 @@ public class DuocGiaoController {
 
     @GetMapping("")
     public ModelAndView getView() {
+
         ModelAndView modelAndView = new ModelAndView("user/DuocGiao");
         return modelAndView;
 

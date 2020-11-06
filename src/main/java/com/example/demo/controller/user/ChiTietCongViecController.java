@@ -1,10 +1,9 @@
 package com.example.demo.controller.user;
 
-import com.example.demo.model.ChiTiet;
-import com.example.demo.model.NhanVien;
-import com.example.demo.model.PhongBan;
-import com.example.demo.model.ThongBao;
+import com.example.demo.model.*;
+import com.example.demo.repository.TinhTrangRepository;
 import com.example.demo.service.ChiTietService;
+import com.example.demo.service.CongViecService;
 import com.example.demo.service.NhanVienService;
 import com.example.demo.service.ThongBaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,18 @@ public class ChiTietCongViecController {
     private ChiTietService chiTietService;
     @Autowired
     private NhanVienService nhanVienService;
+    @Autowired
+    CongViecService congViecService;
+    @Autowired
+    TinhTrangRepository tinhTrangRepository;
 
     @GetMapping("/chitietcongviec/{id}")
     public ModelAndView getView(@PathVariable("id")Long id) {
+        List<CongViec> congViecs = congViecService.tinhTrangCongViec();
+        for (CongViec i : congViecs) {
+            i.setTinhTrang(tinhTrangRepository.findById(2L).orElse(null));
+            congViecService.save(i);
+        }
         ChiTiet chiTiet = chiTietService.findById(id);
 
         Long idCongViec = chiTiet.getCongViec().getId();

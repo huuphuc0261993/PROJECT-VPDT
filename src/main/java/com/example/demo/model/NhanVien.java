@@ -18,7 +18,7 @@ import java.util.Set;
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "mnv")
+
     private Long mnv;
     private String username;
     private String email;

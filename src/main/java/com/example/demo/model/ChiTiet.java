@@ -16,6 +16,7 @@ public class ChiTiet{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
     private int nvChinh = 0;
 

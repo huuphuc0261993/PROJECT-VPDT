@@ -11,6 +11,7 @@ import java.time.LocalDate;
 public class VanBan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(columnDefinition = "bigserial")
     private Long id;
     private String MSVB;
     private String tenvb;

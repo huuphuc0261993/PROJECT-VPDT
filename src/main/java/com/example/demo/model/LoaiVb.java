@@ -12,6 +12,7 @@ import java.util.List;
 public class LoaiVb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long mpb;
     private String tenPb;
 

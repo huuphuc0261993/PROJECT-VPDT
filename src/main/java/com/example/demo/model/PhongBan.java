@@ -12,6 +12,7 @@ import java.util.List;
 public class PhongBan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long MPB;
     private String tenPB;
 

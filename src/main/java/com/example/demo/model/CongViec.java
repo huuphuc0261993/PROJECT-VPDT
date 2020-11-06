@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 public class CongViec {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
 
     @NotNull

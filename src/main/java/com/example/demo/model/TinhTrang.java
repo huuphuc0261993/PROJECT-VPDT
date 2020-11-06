@@ -15,6 +15,7 @@ import java.util.List;
 public class TinhTrang {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(columnDefinition = "bigserial")
     private Long id;
     private String tinhTrang;
 

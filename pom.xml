@@ -14,8 +14,11 @@
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
+<!--    <properties>-->
+<!--        <java.version>11</java.version>-->
+<!--    </properties>-->
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -110,7 +113,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4-1206-jdbc42</version>
             <scope>runtime</scope>
         </dependency>
 
